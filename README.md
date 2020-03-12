@@ -1,2 +1,4 @@
 # meteor
 dymanic blog
+
+## init
