@@ -4,6 +4,11 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 
+//  初始化浏览器样式
+import "./assets/style/reset.css";
+//  全局基本样式
+import "./assets/style/common.less"
+
 Vue.config.productionTip = false
 
 new Vue({
