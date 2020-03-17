@@ -1,0 +1,61 @@
+.meteor-start-wrapper{
+  background: linear-gradient(to bottom,#003176,#015BB1,#4ABDEA,#1F6EB0);
+  height: 100vh;
+  width: 100vw;
+  .layer{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
+  .layer-cloud{
+    z-index: 1;
+  }
+  .layer-main{
+    z-index: 2;
+    .tower{
+      height: 100%;
+      width: 40%;
+      background: #de994c;
+    }
+  }
+  .layer-txt{
+    z-index: 3;
+    .txt-box{
+      position: absolute;
+      width: 20%;
+      height: 100%;
+      .link-start{
+        position: absolute;
+        bottom: 20%;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #015BB1;
+        cursor: pointer;
+        text-transform:uppercase;
+        letter-spacing: 1.8pt;
+        word-spacing: 4pt;
+      }
+    }
+    /*  文字左右蒙版  */
+    .txt-box::before,
+    .txt-box::after{
+      content: '';
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 200%;
+      background: transparent;
+      transition: .4s ease-in-out;
+    }
+    .txt-box::before{
+      left: -200%;
+    }
+    .txt-box::after{
+      right: -200%;
+    }
+    .txt-mask::before,
+    .txt-mask::after{
+      background: #22222240 !important;
+    }
+  }
+}
