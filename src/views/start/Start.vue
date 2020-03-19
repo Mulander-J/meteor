@@ -2,12 +2,17 @@
     <!--    开始页 -->
     <div class="meteor-start-wrapper">
         <!--    云层  -->
-        <div class="layer layer-cloud">
-            <div>cloud</div>
+        <div class="layer layer-cloud" v-if="day_night">
+            <div class="dynamic-cloud the-cloud1"></div>
+            <div class="dynamic-cloud the-cloud2"></div>
+        </div>
+        <!--    星层  -->
+        <div class="layer layer-star meteor-flex-center" v-else>
+            <canvas id="starSky"></canvas>
         </div>
         <!--    艾恩格朗特主城 -->
         <div class="layer layer-main meteor-flex-center">
-            <div class="tower"></div>
+            <div class="tower" :class="{'tower-eve':!day_night}"></div>
         </div>
         <!--    文字链接    -->
         <div class="layer layer-txt meteor-flex-center">
@@ -15,37 +20,45 @@
                 <span class="link-start"
                       @click="handleLink"
                       @mouseleave="link_hover=false"
-                      @mouseenter="link_hover=true">{{link_label}}</span>
+                      @mouseenter="link_hover=true">start</span>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import {mapGetters,mapMutations} from 'vuex'
+    import {mapGetters} from 'vuex'
+    import {skyCircle} from '@/lib/plugin/canvas'
     export default {
         name: "Start",
         computed:{
             ...mapGetters({
-                cur:'time/currentTime'
+                day_night:'global/day_night'
             })
+        },
+        watch:{
+          day_night(){
+              this.initDayNight()
+          }
         },
         data () {
             return {
-                link_label:'link start',
-                link_hover:false
+                link_hover:false,
             }
         },
         mounted () {
-            // setInterval(this.getCurrentTime,500)
+            this.initDayNight()
         },
         methods:{
-            ...mapMutations({
-                'getCurrentTime':'time/_getCurrentTime'
-            }),
+            initDayNight(){
+                if(!this.day_night){    //  黑夜
+                    this.$nextTick(()=>{
+                        skyCircle('#starSky',true)
+                    })
+                }
+            },
             handleLink(){
-                console.log("handleLink");
-                alert('handleLink')
+               alert("handleLink");
             }
         }
     }

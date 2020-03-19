@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/image/logo.png">
+    <img alt="Vue logo" src="../assets/image/logo.gif">
     <div>
       <router-link to="/link">Link</router-link> |
       <router-link to="/tool">Tool</router-link> |
@@ -13,6 +13,11 @@
 
 <script>
 export default {
-  name: 'Home'
+  name: 'Home',
+  methods:{
+    // ...mapMutations({
+    //     'initGlobal':'global/_initGlobal'
+    // }),
+  }
 }
 </script>
