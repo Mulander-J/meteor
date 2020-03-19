@@ -1,39 +1,87 @@
+@maskColor: #00003070;
+@skyBgColor: #000000;
+@linkColor: #FFEB3B;
+@towerEve1:#ffc107cf;
+@towerEve2:#ffeb3b4d;
+@imgCloud1:"./../../assets/image/cloud1.png";
+@imgCloud2:"./../../assets/image/cloud2.png";
+@imgTower:"./../../assets/image/tower.png";
+
 .meteor-start-wrapper{
   background: linear-gradient(to bottom,#003176,#015BB1,#4ABDEA,#1F6EB0);
   height: 100vh;
   width: 100vw;
+  position: relative;
   .layer{
     position: absolute;
     height: 100%;
     width: 100%;
   }
   .layer-cloud{
+    .dynamic-cloud{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-size: cover;
+      background-repeat: repeat-x;
+      background-position: 0 0;
+    }
+    .the-cloud1{
+      z-index: 1;
+      background-image: url(@imgCloud1);
+      animation: cloudDrop1 6000s linear infinite;
+    }
+    .the-cloud2{
+      z-index: 3;
+      background-image: url(@imgCloud2);
+      animation: cloudDrop2 6000s linear infinite;
+    }
+  }
+  .layer-star{
     z-index: 1;
+    background: @skyBgColor;
   }
   .layer-main{
     z-index: 2;
     .tower{
       height: 100%;
-      width: 40%;
-      background: #de994c;
+      width: 50%;
+      border-radius: 50%;
+      background-image: url(@imgTower);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      transition: all .3s ease-in-out;
+      animation: 10s towerWave infinite cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    }
+    .tower-eve{
+      background-image: url(@imgTower), radial-gradient(50% 50% at 50% 50%, @linkColor,@towerEve1,@towerEve2,transparent);
+      background-blend-mode: luminosity;
     }
   }
   .layer-txt{
-    z-index: 3;
+    z-index: 4;
     .txt-box{
       position: absolute;
       width: 20%;
       height: 100%;
       .link-start{
         position: absolute;
+        font-size: 7em;
+        color: @linkColor;
         bottom: 20%;
         left: 50%;
         transform: translateX(-50%);
-        color: #015BB1;
         cursor: pointer;
         text-transform:uppercase;
         letter-spacing: 1.8pt;
-        word-spacing: 4pt;
+        transition: all 0.5s;
+        &:hover{
+          color: #FFFFFF;
+          animation: neon2 1.5s ease-in-out infinite alternate;
+        }
       }
     }
     /*  文字左右蒙版  */
@@ -45,7 +93,7 @@
       height: 100%;
       width: 200%;
       background: transparent;
-      transition: .4s ease-in-out;
+      transition: all 0.25s cubic-bezier(0.54, -0.18, 0.14, 1.1);
     }
     .txt-box::before{
       left: -200%;
@@ -55,7 +103,32 @@
     }
     .txt-mask::before,
     .txt-mask::after{
-      background: #22222240 !important;
+      background: @maskColor !important;
     }
+  }
+}
+@keyframes cloudDrop1 {
+  from { background-position: 0 0; }
+  to { background-position: 4000% 0; }
+}
+@keyframes cloudDrop2 {
+  from { background-position: 0 0; }
+  to { background-position: 30000% 0; }
+}
+@keyframes towerWave {
+  0%, 100% {
+    background-position-y: center;
+  }
+  50% {
+    background-position-y: 30%;
+  }
+}
+@keyframes neon2 {
+  0% {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px @linkColor, 0 0 70px @linkColor, 0 0 80px @linkColor, 0 0 100px @linkColor, 0 0 150px @linkColor;
+  }
+
+  100% {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px @linkColor, 0 0 35px @linkColor, 0 0 40px @linkColor, 0 0 50px @linkColor, 0 0 75px @linkColor;
   }
 }

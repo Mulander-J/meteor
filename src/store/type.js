@@ -1,4 +1,6 @@
 //  mutations-type
 
-/*  time    */
-export const TIME_GET_CURRENT = '_getCurrentTime'
+/*  global    */
+export const GLOBAL_INIT= '_initGlobal'
+export const ACTION_GLOBAL_INIT= 'action_initGlobal'
+export const GLOBAL_GET_CURRENT= '_getCurrentTime'
