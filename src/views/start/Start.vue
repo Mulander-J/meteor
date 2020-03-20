@@ -16,11 +16,9 @@
         </div>
         <!--    文字链接    -->
         <div class="layer layer-txt meteor-flex-center">
-            <div class="txt-box" :class="{'txt-mask':link_hover}">
+            <div class="txt-box">
                 <span class="link-start"
-                      @click="handleLink"
-                      @mouseleave="link_hover=false"
-                      @mouseenter="link_hover=true">start</span>
+                      @click="handleLink">start</span>
             </div>
         </div>
     </div>
@@ -41,11 +39,6 @@
               this.initDayNight()
           }
         },
-        data () {
-            return {
-                link_hover:false,
-            }
-        },
         mounted () {
             this.initDayNight()
         },
@@ -58,7 +51,7 @@
                 }
             },
             handleLink(){
-               alert("handleLink");
+                this.$router.push({name:'Home',query: {id:'1'}})
             }
         }
     }

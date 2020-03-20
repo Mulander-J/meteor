@@ -1,6 +1,8 @@
 <template>
-  <div id="app">
+  <div id="meteor">
+    <!--  路由页  -->
     <router-view/>
+    <!--  页脚  -->
     <FooterBox/>
   </div>
 </template>

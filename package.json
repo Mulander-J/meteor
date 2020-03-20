@@ -5,6 +5,13 @@
     "name": "mulander",
     "email": "mulander@qq.com"
   },
+  "keywords": ["blog","vue"],
+  "description": "Free Blog,Focus on Doc,Foolish Design",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mulander-J/meteor.git"
+  },
+  "license": "MIT",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
