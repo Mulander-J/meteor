@@ -1,0 +1,51 @@
+@mainColor:#3eaf7c;
+blockquote{
+  font-size: .9rem;
+  color: #999;
+  border-left: .5rem solid #dfe2e5;
+  margin: .5rem 0;
+  padding: .25rem 0 .25rem 1rem;
+}
+a, p a code {
+  color: @mainColor;
+}
+h1{
+  font-size: 2.2rem;
+}
+h2{
+  font-size: 1.65rem;
+  padding-bottom: .3rem;
+  border-bottom: 1px solid #eaecef;
+}
+.meteor-header-anchor{
+  font-size: .85em;
+  float: left;
+  margin-left: -.87em;
+  padding-right: .23em;
+  margin-top: .125em;
+  opacity: 0;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.25;
+  &:hover{
+    .meteor-header-anchor{
+      opacity: 1;
+    }
+  }
+}
+.meteor-fake-header{
+  height: 6rem;
+  width: 100%;
+}
+.nav-item{
+  a{
+    color:#2c3e50;
+    font-weight: 500;
+    line-height: 1.4rem;
+    &:hover{
+      margin-bottom: -2px;
+      border-bottom: 2px solid #46bd87;
+    }
+  }
+}

@@ -1,5 +1,7 @@
 <template>
   <div id="meteor">
+    <!--  页首  -->
+    <HeaderBox v-show="$route.name&&('Start'!==$route.name)"/>
     <!--  路由页  -->
     <router-view/>
     <!--  页脚  -->
@@ -8,10 +10,11 @@
 </template>
 
 <script>
+  import HeaderBox from '@/components/header/HeaderBox'
   import FooterBox from '@/components/footer/FooterBox'
   export default {
     name: "App",
-    components:{FooterBox},
+    components:{HeaderBox,FooterBox},
     created(){
       //  初始化时间|位置|天气
       this.$store.dispatch('global/action_initGlobal',{vm:this})

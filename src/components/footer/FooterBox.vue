@@ -1,8 +1,9 @@
 <template>
-   <div>
+   <div class="meteor-footer">
        <!--  页脚触发器 -->
-       <span class="meteor-footer-trigger" :class="{'meteor-footer-triggerOff':trigger}"
-             @click="trigger=!trigger"></span>
+       <div class="meteor-footer-trigger" @click="trigger=!trigger">
+            <span class="trigger-icon" :class="{'meteor-footer-triggerOff':trigger}"></span>
+       </div>
        <!--    页脚内容  -->
        <footer class="meteor-footer-wrapper" :class="{'meteor-footer-out':!trigger}">
            <div></div>
@@ -11,7 +12,7 @@
                <div class="meteor-footer-item meteor-footer-project">
                    <!--    标颜&版本    -->
                    <h2 class="project-title">
-                       <a :href="$conf.repository" target="_blank"><span>{{$conf.name}}</span>_v<span>{{$conf.version}}</span></a>
+                       <a :href="$conf.repository" :data-title="`${$conf.name}_v${$conf.version}`" target="_blank">{{$conf.name}}_v{{$conf.version}}</a>
                    </h2>
                    <!--    项目描述    -->
                    <h3 class="project-desc" v-for="(desc,descNo) in $conf.description" :key="'desc_'+descNo">{{desc}}</h3>

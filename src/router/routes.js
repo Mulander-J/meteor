@@ -14,25 +14,40 @@ const routes = [
         //  主页
         path: '/home',
         name: 'Home',
-        component: () => import('../views/home/Home.vue')
+        component: () => import('../views/page/home/Home.vue')
     },
     {
         //  博客页
         path: '/blog',
         name: 'Blog',
-        component: () => import('../views/Blog.vue')
+        component: () => import('../views/page/blog/Blog.vue')
     },
     {
         //  书签页
-        path: '/link',
-        name: 'Link',
-        component: () => import('../views/Link.vue')
+        path: '/bookmark',
+        name: 'BookMark',
+        component: () => import('@/components/Blank.vue'),
+        redirect:'/bookmark/daily',
+        children:[
+            {
+                //  常用书签
+                path: 'daily',
+                name: 'Daily',
+                component: () => import('../views/page/bookmark/BookMark.vue')
+            },
+            {
+                //  开发书签
+                path: 'devil',
+                name: 'Devil',
+                component: () => import('../views/page/bookmark/BookMark.vue')
+            }
+        ]
     },
     {
         //  工具页
         path: '/tool',
         name: 'Tool',
-        component: () => import('../views/Tool.vue')
+        component: () => import('../views/page/tool/Tool.vue')
     }
 ];
 export default routes

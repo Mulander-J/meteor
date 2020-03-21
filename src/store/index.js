@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import createLogger from 'vuex/dist/logger'; // vuex调试工具
 
 import global from './modules/global'
+import user from './modules/user'
 
 Vue.use(Vuex);
 
@@ -17,6 +18,7 @@ export default new Vuex.Store({
   actions:{},
   getters:{},
   modules: {
-    global
+    global,
+    user
   }
 })
