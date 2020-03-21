@@ -52,7 +52,7 @@ export default {
             }else {
                 return cur<set&&cur>rise
             }
-        }
+        },
     },
     mutations: {
         //  初始化

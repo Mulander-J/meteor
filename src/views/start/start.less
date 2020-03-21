@@ -3,7 +3,6 @@
 @linkColor: #FFEB3B;
 @towerEve1:#ffc107cf;
 @towerEve2:#ffeb3b4d;
-@imgBase:'./../../assets/image/';
 
 .meteor-start-wrapper{
   background: linear-gradient(to bottom,#003176,#015BB1,#4ABDEA,#1F6EB0);
@@ -28,12 +27,12 @@
     }
     .the-cloud1{
       z-index: 1;
-      background-image: url("@{imgBase}cloud1.png");
+      background-image: url("/img/refs/cloud1.png");
       animation: cloudDrop1 6000s linear infinite;
     }
     .the-cloud2{
       z-index: 3;
-      background-image:url("@{imgBase}cloud2.png");
+      background-image:url("/img/refs/cloud2.png");
       animation: cloudDrop2 6000s linear infinite;
     }
   }
@@ -47,7 +46,7 @@
       height: 100%;
       width: 50%;
       border-radius: 50%;
-      background-image: url("@{imgBase}tower.png");
+      background-image: url("/img/refs/tower.png");
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
@@ -55,7 +54,7 @@
       animation: 10s towerWave infinite cubic-bezier(0.68, -0.55, 0.27, 1.55);
     }
     .tower-eve{
-      background-image: url("@{imgBase}tower.png"), radial-gradient(50% 50% at 50% 50%, @linkColor,@towerEve1,@towerEve2,transparent);
+      background-image: url("/img/refs/tower.png"), radial-gradient(50% 50% at 50% 50%, @linkColor,@towerEve1,@towerEve2,transparent);
       background-blend-mode: luminosity;
     }
   }
