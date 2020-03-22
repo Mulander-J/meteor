@@ -11,6 +11,7 @@ export default {
     "description":packageInfo.description.split(','),
     "keywords":packageInfo.keywords,
     "license":packageInfo.license,
+    "homepage":packageInfo.homepage,
     "repository":packageInfo.repository.url.replace('git+',''),
     "secName":"Mulander-J",
     "createDate":"2020.03.12",

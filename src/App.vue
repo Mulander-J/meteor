@@ -2,6 +2,8 @@
   <div id="meteor">
     <!--  页首  -->
     <HeaderBox v-show="$route.name&&('Start'!==$route.name)"/>
+    <!--  占位块 -->
+    <div v-if="$route.name&&('Start'!==$route.name)" class="meteor-fake-header"></div>
     <!--  路由页  -->
     <router-view/>
     <!--  页脚  -->

@@ -7,6 +7,7 @@
   },
   "keywords": ["blog","vue"],
   "description": "Free Blog,Focus on Doc,Foolish Design",
+  "homepage": "https://github.com/Mulander-J/meteor/blob/master/README.md",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Mulander-J/meteor.git"

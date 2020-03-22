@@ -1,6 +1,5 @@
 <template>
     <div class="meteor-link-wrapper">
-        <div class="meteor-fake-header"></div>
         <LinkRow  title="Wiki1001" :linkData="markItem"/>
     </div>
 </template>

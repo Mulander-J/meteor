@@ -1,11 +1,5 @@
 <template>
-  <div class="home">
-    <div>
-      <router-link to="/link">Link</router-link> |
-      <router-link to="/tool">Tool</router-link> |
-      <router-link to="/">Start</router-link> |
-      <router-link to="/blog">Blog</router-link>
-    </div>
+  <div class="meteor-home-wrapper">
     <div>横批</div>
     <div>上联</div>
     <div>下联</div>
@@ -36,3 +30,8 @@
   }
 }
 </script>
+<style scoped lang="less">
+  .meteor-home-wrapper{
+    padding: 2rem;
+  }
+</style>
