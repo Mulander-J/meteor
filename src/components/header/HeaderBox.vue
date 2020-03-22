@@ -42,7 +42,7 @@
                     {name:'Blog',href:null,needUser:true},
                     {name:'BookMark',href:null,children:[{name:'Daily',},{name:'Devil'}]},
                     {name:'Tool',href:null},
-                    {name:'Help',href:this.$conf.repository}
+                    {name:'Help',href:this.$conf.homepage}
                 ]
             }
         }

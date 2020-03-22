@@ -1,6 +1,8 @@
 <template>
-    <div>
-        tool
+    <div class="meteor-tool-wrapper">
+        <div>
+            工具页--未开发
+        </div>
     </div>
 </template>
 
@@ -10,6 +12,8 @@
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+    .meteor-tool-wrapper{
+        padding: 2rem;
+    }
 </style>
