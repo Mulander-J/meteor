@@ -49,3 +49,33 @@ h1, h2, h3, h4, h5, h6 {
     }
   }
 }
+.search-box{
+  display: inline-block;
+  position: relative;
+  margin-right: 1rem;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  vertical-align: top;
+  input{
+    cursor: text;
+    width: 10rem;
+    height: 2rem;
+    color: #4e6e8e;
+    display: inline-block;
+    border: 1px solid #cfd4db;
+    border-radius: 2rem;
+    font-size: .9rem;
+    line-height: 2rem;
+    padding: 0 .5rem 0 2rem;
+    outline: none;
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease;
+    background: #fff url(/img/refs/search.svg) .6rem .5rem no-repeat;
+    background-size: 1rem;
+    &:focus{
+      cursor: auto;
+      border-color: #3eaf7c;
+    }
+  }
+}

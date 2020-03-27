@@ -9,9 +9,7 @@
                     </slot>
                 </div>
                 <div class="modal-body">
-                    <slot name="content">
-                        modal
-                    </slot>
+                    <slot name="content"></slot>
                 </div>
                 <div class="modal-footer" v-if="!footerHide">
                     <slot name="footer">
@@ -26,7 +24,7 @@
 
 <script>
     export default {
-        name: "sao-dialog",
+        name: "m-dialog",
         props:{
             value:{
                 type:Boolean,

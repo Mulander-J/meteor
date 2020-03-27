@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import SaoDialog from './sao-dialog.vue'
+import MDialog from './m-dialog.vue'
 
 const defProp={
     title:'标题',
@@ -13,7 +13,7 @@ function install(Vue) {
 }
 
 function open(props) {
-    let UiDialog = Vue.extend(SaoDialog)
+    let UiDialog = Vue.extend(MDialog)
     let vm = new UiDialog({
         propsData: { ...defProp,...props },
         methods: {

@@ -16,9 +16,6 @@ Vue.prototype.$api = service
 //  配置信息
 import conf from './config'
 Vue.prototype.$conf = conf
-//  注册全局组件——Dialog
-import saoDialog from './components/dialog'
-Vue.use(saoDialog)
 
 
 Vue.config.productionTip = false
