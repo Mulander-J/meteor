@@ -7,6 +7,8 @@ import store from './store'
 import "./assets/style/reset.css"
 //  全局基本样式
 import "./assets/style/common.less"
+// 布局组件相关样式
+import "./assets/style/layout.less"
 //  跨域请求
 import VueJsonp from 'vue-jsonp'
 Vue.use(VueJsonp)

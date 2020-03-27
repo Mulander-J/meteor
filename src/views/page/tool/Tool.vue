@@ -1,9 +1,9 @@
 <template>
-    <div class="meteor-tool-wrapper">
+    <section class="meteor-tool-wrapper">
         <div>
             工具页--未开发
         </div>
-    </div>
+    </section>
 </template>
 
 <script>
