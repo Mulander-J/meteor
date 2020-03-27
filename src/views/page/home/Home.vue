@@ -1,20 +1,23 @@
 <template>
   <div class="meteor-home-wrapper">
-    <div>横批</div>
-    <div>上联</div>
-    <div>下联</div>
-    <div>大堂</div>
-    <button @click="isShow=!isShow">modal</button>
-    <Modal v-model="isShow"></Modal>
-    <button @click="showModal">modal2</button>
+    <div>横批
+      <p>上善若水</p>
+    </div>
+    <div>上联
+      <p>呜呜呜上下求索</p>
+    </div>
+    <div>下联
+      <p>吨吨吨左右横跳</p>
+    </div>
+    <div>大堂
+      <p>奇怪的知识增加了</p>
+    </div>
   </div>
 </template>
 
 <script>
-  import Modal from '@/components/dialog/sao-dialog'
   export default {
     name: 'Home',
-    components:{Modal},
     data(){
       return {
         isShow:false
@@ -24,9 +27,6 @@
       // ...mapMutations({
       //     'initGlobal':'global/_initGlobal'
       // }),
-      showModal(){
-        this.saoDialog.open();
-      }
   }
 }
 </script>

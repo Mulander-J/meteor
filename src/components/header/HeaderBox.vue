@@ -25,7 +25,9 @@
         name: "HeaderBox",
         components:{DropDown},
         computed:{
-            ...mapGetters(["user/userInfo","user/visitorInfo"]),
+            ...mapGetters({
+                userInfo:'user/userInfo'
+            }),
             asyncLinks(){
                 if(this.userInfo){
                     return this.links
