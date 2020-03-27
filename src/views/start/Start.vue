@@ -1,6 +1,6 @@
 <template>
     <!--    开始页 -->
-    <div class="meteor-start-wrapper">
+    <section class="meteor-start-wrapper">
         <!--    云层  -->
         <div class="layer layer-cloud" v-if="day_night">
             <div class="dynamic-cloud the-cloud1"></div>
@@ -26,7 +26,7 @@
                 开始配置
             </div>
         </Modal>
-    </div>
+    </section>
 </template>
 
 <script>

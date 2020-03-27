@@ -1,7 +1,9 @@
 
 export default {
     namespaced: true,
-    state: {},
+    state: {
+
+    },
     getters:{
         userInfo:()=>{return localStorage.getItem('meteor_user')||null},
         visitorInfo:()=>{return localStorage.getItem('meteor_visitor')||null},

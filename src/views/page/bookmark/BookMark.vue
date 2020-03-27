@@ -1,7 +1,7 @@
 <template>
-    <div class="meteor-link-wrapper">
+    <section class="meteor-link-wrapper">
         <LinkRow  title="Wiki1001" :linkData="markItem"/>
-    </div>
+    </section>
 </template>
 
 <script>
