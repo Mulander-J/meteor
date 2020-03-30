@@ -1,3 +1,65 @@
 .meteor-home-wrapper{
-  padding: 2rem;
+  max-width: 980px;
+  margin: 0 auto;
+  position: relative;
+  .meteor-home-header{
+    height: 5rem;
+    width: 60%;
+    margin: 0 auto;
+  }
+  .meteor-home-content{
+    .home-content-right,
+    .home-content-left{
+      position: relative;
+      z-index: 2;
+      height: 50vh;
+      width: 5rem;
+      writing-mode: vertical-rl;
+      letter-spacing: 4px;
+      line-height: 1.4;
+    }
+    .home-content-right{
+      float: right;
+    }
+    .home-content-left{
+      float: left;
+    }
+    .home-content-main{
+      z-index: 1;
+      width: 100%;
+      height: 50vh;
+      background-color: #eee;
+    }
+  }
+  .home-front,
+  .home-back{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &::before{
+      position: absolute;
+      display: block;
+      content: '';
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: .4;
+      z-index: -1;
+    }
+  }
+  .home-front{
+    &::before{
+      background-image: url("/img/refs/BirchVellum.jpg");
+    }
+  }
+  .home-back{
+    text-align: left;
+    &::before{
+      background-image: url("/img/refs/JuteVellum.jpg");
+    }
+  }
 }
