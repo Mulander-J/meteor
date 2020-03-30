@@ -11,14 +11,14 @@ export default {
     "name":packageInfo.name,
     "version":packageInfo.version,
     "author":packageInfo.author,
+    "secName":"Mulander-J",
     "description":packageInfo.description.split(','),
     "keywords":packageInfo.keywords,
     "license":packageInfo.license,
     "homepage":packageInfo.homepage,
-    "repository":packageInfo.repository.url.replace('git+',''),
-    "secName":"Mulander-J",
-    "createDate":"2020.03.12",
     "appHome":"/start",
+    "repository":packageInfo.repository.url.replace('git+',''),
+    "createDate":"2020.03.12",
     "contact":{
         "github":{
             "link":"https://github.com/Mulander-J",
@@ -36,5 +36,19 @@ export default {
     "nav":{
         showHelp:false,
         data:navData
+    },
+    "homeLabel":{
+        header:{
+            front:'上善若水',
+            back:'鱼与熊掌兮,我欲皆得之'
+        },
+        left:{
+            front:'呜呜呜上下求索',
+            back:'基于书签对知识点进行 整理，吸收，吐纳，归档。吾将上下而求索'
+        },
+        right:{
+            front:'吨吨吨左右横跳',
+            back:'活着，是一件最能带来满足感的事。细细琢磨吧，人生啊，有意思的很'
+        }
     }
 }

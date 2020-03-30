@@ -1,39 +1,53 @@
 <template>
   <!--  Home页 -->
   <section class="meteor-home-wrapper">
+    <div class="right-img"></div>
+    <div class="left-img"></div>
     <!--  横批  -->
     <div class="meteor-home-header">
-      <p>上善若水</p>
-      <p>鱼和熊掌我全都要...</p>
+      <FlipBox direction="x" wrapClass="flip-border">
+        <div slot="front" class="home-front">
+          <p>{{$conf.homeLabel.header.front}}</p>
+        </div>
+        <div slot="back" class="home-back">
+          <p class="txt-more">{{$conf.homeLabel.header.back}}</p>
+        </div>
+      </FlipBox>
     </div>
+    <!--  大堂  -->
     <div class="meteor-home-content">
       <!--  上联  -->
       <div class="home-content-left">
-        <div class="flip">
-          <div class="front">
-            <p>呜呜呜上下求索</p>
+        <FlipBox direction="y" wrapClass="flip-border">
+          <div slot="front" class="home-front">
+            <p>{{$conf.homeLabel.left.front}}</p>
           </div>
-          <div class="back">
-            <p>基于书签对知识点进行 整理，吸收，吐纳，归档。吾将上下而求索...</p>
+          <div slot="back" class="home-back">
+            <p class="txt-more">{{$conf.homeLabel.left.back}}</p>
           </div>
-        </div>
+        </FlipBox>
       </div>
       <!--  下联  -->
       <div class="home-content-right">
-        <p>吨吨吨左右横跳</p>
-        <p>活着，是一件最能带来满足感的事。细细琢磨吧，人生啊，有意思的很...</p>
+        <FlipBox direction="y" wrapClass="flip-border">
+          <div slot="front" class="home-front">
+            <p>{{$conf.homeLabel.right.front}}</p>
+          </div>
+          <div slot="back" class="home-back">
+            <p class="txt-more">{{$conf.homeLabel.right.back}}</p>
+          </div>
+        </FlipBox>
       </div>
-      <!--  大堂  -->
-      <div class="home-content-main">
-        <p>奇怪的知识增加了</p>
-      </div>
+      <div class="home-content-main">main</div>
     </div>
   </section>
 </template>
 
 <script>
+  import FlipBox from '@/components/flipBox/FlipBox'
   export default {
     name: 'Home',
+    components:{FlipBox},
     data(){
       return {
         isShow:false
@@ -48,4 +62,11 @@
 </script>
 <style scoped lang="less">
   @import "home";
+</style>
+<style>
+  .flip-border{
+    border: 2px solid #daa4a0;
+    box-sizing: border-box;
+    padding: 4px;
+  }
 </style>
