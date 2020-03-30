@@ -1,17 +1,28 @@
 <template>
     <div class="meteor-header-wrapper">
-        <a class="meteor-header-startLink meteor-txtGradient" href="/start">{{$conf.name}}</a>
+        <!--    左侧logo  -->
+        <a class="meteor-header-startLink meteor-txtGradient" :href="$conf.appHome">{{$conf.name}}</a>
         <div class="meteor-header-right">
-            <div class="search-box">
-                <input placeholder="" spellcheck="false" autocomplete="off">
-            </div>
+            <!--    整站搜索    -->
+            <el-input class="search-box"  size="small" prefix-icon="el-icon-search" placeholder=""></el-input>
+            <!--    导航链接    -->
             <nav class="nav-links">
-                <div class="nav-item" v-for="(item,index) in asyncLinks" :key="index">
+                <div class="nav-item" v-for="(item,index) in $conf.nav.data" :key="index">
                     <template>
-                        <DropDown v-if="item.children" :title="item.name" :list="item.children"></DropDown>
-                        <a v-else-if="item.href" :href="item.href" class="meteor-outBound" target="_blank">{{item.name}}</a>
-                        <router-link v-else :to="item">{{item.name}}</router-link>
+                        <el-dropdown v-if="item.children" @command="_goRouter">
+                            <span class="nav-drop-link">{{item.name}}</span>
+                            <span class="nav-drop-ico"></span>
+                            <el-dropdown-menu slot="dropdown">
+                                <el-dropdown-item v-for="(child,chiNo) in item.children" :key="'drop'+chiNo" :command="child">
+                                    <span>{{child.name}}</span>
+                                </el-dropdown-item>
+                            </el-dropdown-menu>
+                        </el-dropdown>
+                        <router-link class="nav-drop-link" v-else :to="item">{{item.name}}</router-link>
                     </template>
+                </div>
+                <div v-if="$conf.nav.showHelp" class="nav-item">
+                    <a :href="$conf.homepage" class="nav-drop-link meteor-outBound" target="_blank">Help</a>
                 </div>
             </nav>
         </div>
@@ -19,33 +30,11 @@
 </template>
 
 <script>
-    import {mapGetters} from 'vuex'
-    import DropDown from './../dropDown/DropDown'
     export default {
         name: "HeaderBox",
-        components:{DropDown},
-        computed:{
-            ...mapGetters({
-                userInfo:'user/userInfo'
-            }),
-            asyncLinks(){
-                if(this.userInfo){
-                    return this.links
-                }else {
-                    return this.links.filter(ele=>!ele.needUser)
-                }
-
-            }
-        },
-        data () {
-            return {
-                links:[
-                    {name:'Home',href:null,needUser:true},
-                    {name:'Blog',href:null,needUser:true},
-                    {name:'BookMark',href:null,children:[{name:'Daily',},{name:'Devil'}]},
-                    {name:'Tool',href:null},
-                    {name:'Help',href:this.$conf.homepage}
-                ]
+        methods:{
+            _goRouter(item){
+                this.$router.push(item)
             }
         }
     }

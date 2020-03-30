@@ -11,10 +11,10 @@
 鱼与熊掌欲也
 ## 方案
 前端主题开发计划由博客数驱动，2020年每20一个纪元，2021年每21一个纪元，类推。
+### 宗旨
+**foolish design,focus on doc,free blog**
 ## 细化
 >   [使用说明]()
-### 宗旨
-foolish design，focus on doc，free blog
 ### 思路设计
 router，balabala
 ### 要素拆解

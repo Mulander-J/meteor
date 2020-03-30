@@ -21,21 +21,20 @@
             </div>
         </div>
         <!--    初始化对话框  -->
-        <Modal v-model="isShow" title="准备开始" @on-ok="handleStart">
-            <div slot="content">
+        <el-dialog  title="Start" :visible.sync="isShow">
+            <div>
                 开始配置
+                <el-button @click="handleStart">开始</el-button>
             </div>
-        </Modal>
+        </el-dialog>
     </section>
 </template>
 
 <script>
     import {mapGetters} from 'vuex'
-    import {skyCircle} from '@/lib/plugin/canvas'
-    import Modal from '@/components/dialog/m-dialog'
+    import {skyCircle} from '@/plugin/canvas'
     export default {
         name: "Start",
-        components:{Modal},
         data(){
             return{
                 isShow:false

@@ -6,7 +6,7 @@
 
 <script>
     import LinkRow from '@/components/linkRow/LinkRow'
-    import linkData from './../../../../explain/data/link'
+    import linkData from '../../../service/cache/link'
 
 
     export default {

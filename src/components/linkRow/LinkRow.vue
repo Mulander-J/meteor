@@ -10,28 +10,22 @@
            <h2 :id="key">
                <a :href="'#'+key" aria-hidden="true" class="meteor-header-anchor">#</a>
                <span>{{key}}</span>
-               <span class="item-list-count">{{row.length}}</span>
+               <span class="item-list-count">/_{{row.length}}</span>
            </h2>
            <div class="item-list">
-               <div class="item-box">
-                   <a
-                           class="item"
-                           :class="{'item-wall':item.outWall}"
-                           v-for="(item,inIndex) in row"
-                           :key="item.title+'_'+inIndex"
-                           :href="item.links"
-                           :title="item.desc"
-                           target="_blank"
-                   >
+               <transition-group name="el-zoom-in-center" class="item-box">
+                   <a class="item" :class="{'item-wall':item.outWall}"
+                      v-for="(item,inIndex) in row" :key="item.title+'_'+inIndex"
+                      :href="item.links" :title="item.desc" target="_blank">
                        <div class="left">
                            <img src="/img/refs/default.png" alt="">
                        </div>
                        <div class="right">
-                           <div class="title">{{item.title}}</div>
+                           <div class="title meteor-text-upper">{{item.title}}</div>
                            <div class="des">{{item.desc}}</div>
                        </div>
                    </a>
-               </div>
+               </transition-group>
            </div>
        </div>
    </div>
