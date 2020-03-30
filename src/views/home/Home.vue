@@ -1,8 +1,8 @@
 <template>
   <!--  Home页 -->
   <section class="meteor-home-wrapper">
-    <div class="right-img"></div>
-    <div class="left-img"></div>
+    <div class="home-img left-img"></div>
+    <div class="home-img right-img"></div>
     <!--  横批  -->
     <div class="meteor-home-header">
       <FlipBox direction="x" wrapClass="flip-border">
@@ -14,7 +14,7 @@
         </div>
       </FlipBox>
     </div>
-    <!--  大堂  -->
+    <!--  中心  -->
     <div class="meteor-home-content">
       <!--  上联  -->
       <div class="home-content-left">
@@ -38,6 +38,7 @@
           </div>
         </FlipBox>
       </div>
+      <!--  大堂  -->
       <div class="home-content-main">main</div>
     </div>
   </section>
