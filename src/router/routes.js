@@ -1,4 +1,4 @@
-const routes = [
+export const routes = [
     {
         path: '/',
         name: 'meteor',
@@ -14,13 +14,13 @@ const routes = [
         //  主页
         path: '/home',
         name: 'Home',
-        component: () => import('../views/page/home/Home.vue')
+        component: () => import('../views/home/Home.vue')
     },
     {
         //  博客页
         path: '/blog',
         name: 'Blog',
-        component: () => import('../views/page/blog/Blog.vue')
+        component: () => import('../views/blog/Blog.vue')
     },
     {
         //  书签页
@@ -33,21 +33,88 @@ const routes = [
                 //  常用书签
                 path: 'daily',
                 name: 'Daily',
-                component: () => import('../views/page/bookmark/BookMark.vue')
+                component: () => import('../views/bookmark/BookMark.vue')
             },
             {
                 //  开发书签
                 path: 'devil',
                 name: 'Devil',
-                component: () => import('../views/page/bookmark/BookMark.vue')
+                component: () => import('../views/bookmark/BookMark.vue')
             }
         ]
     },
     {
-        //  工具页
-        path: '/tool',
-        name: 'Tool',
-        component: () => import('../views/page/tool/Tool.vue')
+        //  记录页
+        path: '/record',
+        name: 'Record',
+        redirect:'/record/log',
+        component: () => import('@/components/Blank.vue'),
+        children:[
+            {
+                //  开发日志
+                path: 'log',
+                name: 'Log',
+                component: () => import('../views/record/Record.vue')
+            },
+            {
+                //  动漫
+                path: 'animate',
+                name: 'Animate',
+                component: () => import('../views/record/Record.vue')
+            },
+            {
+                //  动漫
+                path: 'book',
+                name: 'Book',
+                component: () => import('../views/record/Record.vue')
+            },
+            {
+                //  动漫
+                path: 'movie',
+                name: 'Movie',
+                component: () => import('../views/record/Record.vue')
+            },
+            {
+                //  动漫
+                path: 'music',
+                name: 'Music',
+                component: () => import('../views/record/Record.vue')
+            },
+            {
+                //  动漫
+                path: 'sport',
+                name: 'Sport',
+                component: () => import('../views/record/Record.vue')
+            },
+            {
+                //  动漫
+                path: 'travel',
+                name: 'Travel',
+                component: () => import('../views/record/Record.vue')
+            },
+        ]
     }
 ];
-export default routes
+export const navData = [
+    {name:'Home'},
+    {name:'Blog'},
+    {
+        name:'BookMark',
+        children:[
+            {name:'Daily',},
+            {name:'Devil'}
+        ]
+    },
+    {
+        name:'Record',
+        children:[
+            {name:'Log'},
+            {name:'Animate'},
+            {name:'Book'},
+            {name:'Movie'},
+            {name:'Music'},
+            {name:'Sport'},
+            {name:'Travel'}
+        ]
+    }
+];

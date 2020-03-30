@@ -47,5 +47,5 @@
 }
 </script>
 <style scoped lang="less">
-  @import "./home";
+  @import "home";
 </style>

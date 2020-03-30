@@ -1,12 +1,12 @@
 <template>
     <div>
-        菜单
+        Record-developing
     </div>
 </template>
 
 <script>
     export default {
-        name: "Tree"
+        name: "Record"
     }
 </script>
 

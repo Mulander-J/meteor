@@ -1,5 +1,5 @@
 import * as type from './../type'
-import {computeSunRiseSunSet} from "@/lib/plugin/sunCalc";
+import {computeSunRiseSunSet} from "@/plugin/sunCalc";
 
 const def_location = {
     address:'Earth',
