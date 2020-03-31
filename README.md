@@ -279,7 +279,7 @@ export const routes = [
 
 
 ## 3.开发计划_最后更新：`2020/03/22`
-> [开发日志](http://sad/log.md)  
+> [开发日志](https://github.com/Mulander-J/meteor/blob/master/explain/log.md)  
 
 零纪元 `2020/03/12-2020/03/31`
 
