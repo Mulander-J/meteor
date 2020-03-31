@@ -1,5 +1,5 @@
 <template>
-   <div>
+   <div class="meteor-linkRow">
        <h1 :id="linkData.title" class="meteor-txtGradient">
            <a :href="'#'+linkData.title" aria-hidden="true" class="meteor-header-anchor">#</a>
            <span>{{linkData.title}}</span>

@@ -11,87 +11,95 @@ export const routes = [
         component: () => import('../views/start/Start.vue')
     },
     {
-        //  主页
-        path: '/home',
-        name: 'Home',
-        component: () => import('../views/home/Home.vue')
+        //  分享页
+        path: '/sharePage',
+        name: 'SharePage',
+        component: () => import('../views/share/SharePage.vue')
     },
     {
-        //  博客页
-        path: '/blog',
-        name: 'Blog',
-        component: () => import('../views/blog/Blog.vue')
-    },
-    {
-        //  书签页
-        path: '/bookmark',
-        name: 'BookMark',
-        component: () => import('@/components/Blank.vue'),
-        redirect:'/bookmark/daily',
+        name:'Page',
+        path:'/page',
+        redirect:'/page/home',
+        component: () => import('@/components/layout/Page.vue'),
         children:[
             {
-                //  常用书签
-                path: 'daily',
-                name: 'Daily',
-                component: () => import('../views/bookmark/BookMark.vue')
+                //  主页
+                path: 'home',
+                name: 'Home',
+                component: () => import('../views/page/home/Home.vue')
             },
             {
-                //  开发书签
-                path: 'devil',
-                name: 'Devil',
-                component: () => import('../views/bookmark/BookMark.vue')
+                //  博客页
+                path: 'blog',
+                name: 'Blog',
+                component: () => import('../views/page/blog/Blog.vue')
+            },
+            {
+                //  书签页
+                path: 'bookmark',
+                name: 'BookMark',
+                component: () => import('@/components/layout/Blank.vue'),
+                redirect:'/page/bookmark/daily',
+                children:[
+                    {
+                        //  常用书签
+                        path: 'daily',
+                        name: 'Daily',
+                        component: () => import('../views/page/bookmark/BookMark.vue')
+                    },
+                    {
+                        //  开发书签
+                        path: 'devil',
+                        name: 'Devil',
+                        component: () => import('../views/page/bookmark/BookMark.vue')
+                    }
+                ]
+            },
+            {
+                //  记录页
+                path: 'record',
+                name: 'Record',
+                redirect:'/page/record/recLog',
+                component: () => import('../views/page/record/Record.vue'),
+                children:[
+                    {
+                        //  开发日志
+                        path: 'recLog',
+                        name: 'RecLog',
+                        component: () => import('../views/page/record/RecLog.vue')
+                    },
+                    {
+                        //  动漫
+                        path: 'animate',
+                        name: 'Animate',
+                        component: () => import('../views/page/record/RecMedia.vue')
+                    },
+                    {
+                        //  书籍
+                        path: 'book',
+                        name: 'Book',
+                        component: () => import('../views/page/record/RecMedia.vue')
+                    },
+                    {
+                        //  影视剧
+                        path: 'movie',
+                        name: 'Movie',
+                        component: () => import('../views/page/record/RecMedia.vue')
+                    },
+                    {
+                        //  旅行
+                        path: 'recMap',
+                        name: 'RecMap',
+                        component: () => import('../views/page/record/RecMap.vue')
+                    },
+                    {
+                        //  票据
+                        path: 'recTicket',
+                        name: 'RecTicket',
+                        component: () => import('../views/page/record/RecTicket.vue')
+                    },
+                ]
             }
-        ]
-    },
-    {
-        //  记录页
-        path: '/record',
-        name: 'Record',
-        redirect:'/record/log',
-        component: () => import('@/components/Blank.vue'),
-        children:[
-            {
-                //  开发日志
-                path: 'log',
-                name: 'Log',
-                component: () => import('../views/record/Record.vue')
-            },
-            {
-                //  动漫
-                path: 'animate',
-                name: 'Animate',
-                component: () => import('../views/record/Record.vue')
-            },
-            {
-                //  动漫
-                path: 'book',
-                name: 'Book',
-                component: () => import('../views/record/Record.vue')
-            },
-            {
-                //  动漫
-                path: 'movie',
-                name: 'Movie',
-                component: () => import('../views/record/Record.vue')
-            },
-            {
-                //  动漫
-                path: 'music',
-                name: 'Music',
-                component: () => import('../views/record/Record.vue')
-            },
-            {
-                //  动漫
-                path: 'sport',
-                name: 'Sport',
-                component: () => import('../views/record/Record.vue')
-            },
-            {
-                //  动漫
-                path: 'travel',
-                name: 'Travel',
-                component: () => import('../views/record/Record.vue')
-            },
         ]
     }
 ];
@@ -99,22 +107,27 @@ export const navData = [
     {name:'Home'},
     {name:'Blog'},
     {
+        name:'Record'
+    },
+    {
         name:'BookMark',
         children:[
             {name:'Daily',},
             {name:'Devil'}
         ]
-    },
-    {
-        name:'Record',
-        children:[
-            {name:'Log'},
-            {name:'Animate'},
-            {name:'Book'},
-            {name:'Movie'},
-            {name:'Music'},
-            {name:'Sport'},
-            {name:'Travel'}
-        ]
     }
+];
+export const recMenu = [
+    {name:'RecLog',label:'开发日志',children:null},
+    {
+        name:'RecMedia',
+        label:'多媒体',
+        children:[
+            {name:'Animate',label:'动漫',children:null},
+            {name:'Book',label:'书籍',children:null},
+            {name:'Movie',label:'影视剧',children:null},
+        ]
+    },
+    {name:'RecMap',label:'旅行',children:null},
+    {name:'RecTicket',label:'票据',children:null},
 ];

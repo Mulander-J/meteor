@@ -1,12 +1,12 @@
 <template>
-    <section>
-        {{$conf.userInfo}}
-    </section>
+    <div>
+        RecMedia -{{$route.name}}
+    </div>
 </template>
 
 <script>
     export default {
-        name: "userInfo"
+        name: "RecMedia"
     }
 </script>
 

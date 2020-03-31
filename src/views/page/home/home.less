@@ -1,0 +1,155 @@
+@import "../../../assets/style/var";
+@homeHeight:calc(100vh - 15rem);
+@homeHeightMin:500px;
+
+.meteor-home-wrapper{
+  max-width: 60vw;
+  margin: 0 auto;
+  .home-img{
+    width: 20%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+  }
+  .left-img{
+    background-image: url("/img/refs/home_left.jpeg");
+    left: 0;
+  }
+  .right-img{
+    background-image: url("/img/refs/home_right.jpeg");
+    right: 0;
+  }
+  .meteor-home-header{
+    position: relative;
+    height: 5rem;
+    width: 60%;
+    margin: 0 auto;
+    font-family: cursive;
+    z-index: @homeIndex+10;
+  }
+  .meteor-home-content{
+    height:@homeHeight;
+    min-height: @homeHeightMin;
+    position: relative;
+    z-index: @homeIndex+10;
+    .home-content-right,
+    .home-content-left{
+      position: absolute;
+      z-index: @homeIndex+10;
+      top: 0;
+      width: 5rem;
+      height: 100%;
+      font-family: cursive;
+      writing-mode: vertical-rl;
+      letter-spacing: 4px;
+      line-height: 1.4;
+      background-color:transparent;
+    }
+    .home-content-right{
+      right: 0;
+    }
+    .home-content-left{
+      left: 0;
+    }
+    .home-content-main{
+      position: relative;
+      padding: 0 5rem;
+      height:calc(100vh - 15rem);
+      min-height: @homeHeightMin;
+      background-color: transparent;
+      #homePixel{
+        width: 90%;
+        height: 60%;
+        margin: 0 auto;
+      }
+      @pixelColor:#003349;
+      .home-action{
+        height: 30%;
+        min-height: 10rem;
+        padding: .6rem 0;
+        .home-user{
+          display: inline-block;
+          position: relative;
+          height: 10rem;
+          cursor: pointer;
+          width: 10rem;
+          background-image: url(/img/refs/logo.gif);
+          border: 1px solid @pixelColor;
+          background-color: white;
+          box-shadow: 1px 1px 1px 1px #000;
+          border-radius: 50%;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
+          &::before{
+            content:'';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: white;
+            opacity: 0.3;
+            top: 0;
+            left: 0;
+            transform: scale(0);
+            transition: .2s ease-in-out;
+          }
+          &:hover{
+            &::before{
+              transform: scale(1);
+            }
+          }
+        }
+        input{
+          width: 8em;
+          background: none;
+          border: none;
+          outline: none;
+          border-bottom: 2px solid @pixelColor;
+          color: @pixelColor;
+          font-size: 3em;
+          text-align: center;
+          opacity: .4;
+          transition: all .3s ease-in-out;
+          &:hover{
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+  .home-front,
+  .home-back{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &::before{
+      position: absolute;
+      display: block;
+      content: '';
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: .4;
+      z-index: -1;
+    }
+  }
+  .home-front{
+    &::before{
+      background-image: url("/img/refs/BirchVellum.jpg");
+    }
+  }
+  .home-back{
+    text-align: left;
+    &::before{
+      background-image: url("/img/refs/JuteVellum.jpg");
+    }
+  }
+}

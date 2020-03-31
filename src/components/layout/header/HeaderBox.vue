@@ -41,5 +41,5 @@
 </script>
 
 <style scoped lang="less">
-@import "./header.less";
+@import "header.less";
 </style>

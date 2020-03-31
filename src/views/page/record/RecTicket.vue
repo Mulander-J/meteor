@@ -1,12 +1,12 @@
 <template>
-    <section>
-        {{$conf.userInfo}}
-    </section>
+    <div>
+        RecTicket
+    </div>
 </template>
 
 <script>
     export default {
-        name: "userInfo"
+        name: "RecTicket"
     }
 </script>
 

@@ -49,5 +49,5 @@
 </script>
 
 <style scoped lang="less">
-    @import "./footerBox";
+    @import "footerBox";
 </style>

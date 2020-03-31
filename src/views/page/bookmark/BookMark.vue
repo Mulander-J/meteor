@@ -1,12 +1,12 @@
 <template>
     <section class="meteor-link-wrapper">
-        <LinkRow  title="Wiki1001" :linkData="markItem"/>
+        <LinkRow  :linkData="markItem"/>
     </section>
 </template>
 
 <script>
     import LinkRow from '@/components/linkRow/LinkRow'
-    import linkData from '../../../service/cache/link'
+    import linkData from '../../../../service/cache/link'
 
 
     export default {
