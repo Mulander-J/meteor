@@ -9,7 +9,9 @@
                 <!--    目录检索输入框     -->
                 <el-input placeholder="enter text" v-model="filterText" clearable></el-input>
                 <!--    目录树     -->
-                <ElTree class="meteor-margin-top1" ref="tree" accordion default-expand-all
+                <ElTree class="meteor-margin-top1" ref="tree"
+                        style="background: transparent;"
+                        accordion default-expand-all
                         :expand-on-click-node="false" node-key="id"
                         :props="tree_props" :data="list_menu"
                         :filter-node-method="_filterNode"
@@ -44,7 +46,9 @@
 
 <script>
     import BlogLine from '@/components/blogLine/BlogLine.vue'
+
     const allMenuName = 'all'
+
     export default {
         name: "Blog",
         components:{BlogLine},
@@ -349,10 +353,13 @@
             width: @leftPx;
             min-height: 20em;
             position: fixed;
+            z-index: 5;
+            background: transparent;
         }
         .blog-col-timeLine{
             width:  calc(100% - @leftPx - @blankPx);
             margin-left: @leftPx;
+            z-index: 5;
         }
     }
 </style>

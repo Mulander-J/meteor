@@ -1,12 +1,12 @@
 <template>
     <div>
-        Record-developing
+        RecMap
     </div>
 </template>
 
 <script>
     export default {
-        name: "Record"
+        name: "RecMap"
     }
 </script>
 
