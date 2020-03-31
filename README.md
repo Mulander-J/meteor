@@ -256,26 +256,27 @@ export const routes = [
 
 - 开始页-白天
 
-![start_day](./explain/img/start_day.jpg)
+![start_day](https://github.com/Mulander-J/meteor/blob/master/explain/img//start_day.jpg)
 
 - 开始页-黑夜
 
-![start_night](./explain/img/start_night.jpg)
+![start_night](https://github.com/Mulander-J/meteor/blob/master/explain/img/start_night.jpg)
 
 - 首页
 
-![home](./explain/img/home.jpg)
+![home](https://github.com/Mulander-J/meteor/blob/master/explain/img/home.jpg)
 
 - 页脚
-![footer](./explain/img/footer.jpg)
+
+![footer](https://github.com/Mulander-J/meteor/blob/master/explain/img/footer.jpg)
 
 - 博客页
 
-![blog](./explain/img/blog.jpg)
+![blog](https://github.com/Mulander-J/meteor/blob/master/explain/img/blog.jpg)
 
 - 书签页
 
-![bookmark](./explain/img/bookmark.jpg)
+![bookmark](https://github.com/Mulander-J/meteor/blob/master/explain/img/bookmark.jpg)
 
 
 ## 3.开发计划_最后更新：`2020/03/22`
