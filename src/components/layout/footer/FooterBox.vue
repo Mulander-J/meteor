@@ -22,7 +22,7 @@
                    <div class="author-item author-self">
                        <p class="self-linkRow meteor-flex-center">
                            <a v-for="(val,key,no) in $conf.contact" :key="'link_'+no" :href="val.link" target="_blank" class="self-link">
-                               <img :src="val.img" :title="key" :alt="key">
+                               <img :src="imgMap[key]" :title="key" :alt="key">
                            </a>
                        </p>
                    </div>
@@ -38,10 +38,16 @@
 </template>
 
 <script>
+    import github from './assets/github.png'
+    import segment from './assets/segment.png'
+    import outlook from './assets/outlook.png'
     export default {
         name: "FooterBox",
         data(){
             return {
+                imgMap:{
+                    github,segment,outlook,
+                },
                 trigger:false
             }
         }

@@ -8,7 +8,6 @@
     import LinkRow from '@/components/linkRow/LinkRow'
     import linkData from '../../../../service/cache/link'
 
-
     export default {
         name: "BookMark",
         components:{LinkRow},

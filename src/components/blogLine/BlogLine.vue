@@ -14,6 +14,7 @@
                     <div>
                         <el-button  @click="$emit('on-favor',item)"  icon="el-icon-star-on" circle></el-button>
                         <el-button  @click="$emit('on-photo',item)"  icon="el-icon-camera" circle></el-button>
+                        <el-button  @click="$emit('on-share',item)"  icon="el-icon-share" circle></el-button>
                     </div>
                 </div>
             </el-card>

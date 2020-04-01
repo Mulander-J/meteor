@@ -1,3 +1,69 @@
+export const navData = [
+    {name:'Home'},
+    {name:'Blog'},
+    {name:'Record'},
+    {
+        name:'BookMark',
+        children:[
+            {name:'Daily',},
+            {name:'Devil'}
+        ]
+    }
+];
+export const recMenu = [
+    {
+        //  开发日志
+        path: 'recLog',
+        name: 'RecLog',
+        meta:{title:'开发日志'},
+        component: () => import('../views/front/record/RecLog.vue')
+    },
+    {
+        //  多媒体
+        path: 'media',
+        name: 'Media',
+        meta:{title:'多媒体'},
+        redirect:'/meteor/record/media/book',
+        component: () => import('@/components/layout/Blank.vue'),
+        children:[
+            {
+                //  书籍
+                path: 'book',
+                name: 'Book',
+                meta:{title:'书籍'},
+                component: () => import('../views/front/record/RecMedia.vue')
+            },
+            {
+                //  动漫
+                path: 'animate',
+                name: 'Animate',
+                meta:{title:'动漫'},
+                component: () => import('../views/front/record/RecMedia.vue')
+            },
+            {
+                //  影视剧
+                path: 'movie',
+                name: 'Movie',
+                meta:{title:'影视剧'},
+                component: () => import('../views/front/record/RecMedia.vue')
+            }
+        ]
+    },
+    {
+        //  旅行
+        path: 'recMap',
+        name: 'RecMap',
+        meta:{title:'旅行'},
+        component: () => import('../views/front/record/RecMap.vue')
+    },
+    {
+        //  票据
+        path: 'recTicket',
+        name: 'RecTicket',
+        meta:{title:'票剧'},
+        component: () => import('../views/front/record/RecTicket.vue')
+    },
+];
 //  博客平台
 export const meteorRoute = [
     //  博客站点
@@ -46,53 +112,7 @@ export const meteorRoute = [
                 name: 'Record',
                 redirect:'/meteor/record/recLog',
                 component: () => import('../views/front/record/Record.vue'),
-                children:[
-                    {
-                        //  开发日志
-                        path: 'recLog',
-                        name: 'RecLog',
-                        component: () => import('../views/front/record/RecLog.vue')
-                    },
-                    {
-                        //  多媒体
-                        path: 'media',
-                        name: 'Media',
-                        redirect:'/meteor/record/media/book',
-                        component: () => import('@/components/layout/Blank.vue'),
-                        children:[
-                            {
-                                //  书籍
-                                path: 'book',
-                                name: 'Book',
-                                component: () => import('../views/front/record/RecMedia.vue')
-                            },
-                            {
-                                //  影视剧
-                                path: 'movie',
-                                name: 'Movie',
-                                component: () => import('../views/front/record/RecMedia.vue')
-                            },
-                            {
-                                //  动漫
-                                path: 'animate',
-                                name: 'Animate',
-                                component: () => import('../views/front/record/RecMedia.vue')
-                            },
-                        ]
-                    },
-                    {
-                        //  旅行
-                        path: 'recMap',
-                        name: 'RecMap',
-                        component: () => import('../views/front/record/RecMap.vue')
-                    },
-                    {
-                        //  票据
-                        path: 'recTicket',
-                        name: 'RecTicket',
-                        component: () => import('../views/front/record/RecTicket.vue')
-                    },
-                ]
+                children:recMenu
             }
         ]
     },
@@ -119,34 +139,6 @@ export const adminRoute = [
         name: 'Start',
         component: () => import('../views/start/Start.vue')
     },
-];
-export const navData = [
-    {name:'Home'},
-    {name:'Blog'},
-    {
-        name:'Record'
-    },
-    {
-        name:'BookMark',
-        children:[
-            {name:'Daily',},
-            {name:'Devil'}
-        ]
-    }
-];
-export const recMenu = [
-    {name:'RecLog',label:'开发日志',children:null},
-    {
-        name:'RecMedia',
-        label:'多媒体',
-        children:[
-            {name:'Animate',label:'动漫',children:null},
-            {name:'Book',label:'书籍',children:null},
-            {name:'Movie',label:'影视剧',children:null},
-        ]
-    },
-    {name:'RecMap',label:'旅行',children:null},
-    {name:'RecTicket',label:'票据',children:null},
 ];
 
 export const routes = [
