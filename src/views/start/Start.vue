@@ -70,7 +70,7 @@
              */
             handleLink(){
                 if(this.userInfo){
-                    this._goToHome({userId:1});
+                    this._goToHome();
                 }else {
                     this.isShow = true;
                 }
@@ -81,15 +81,14 @@
             handleStart(){
                 this.isShow = false;
                 localStorage.setItem('meteor_user',JSON.stringify({userId:1}));
-                this._goToHome({userId:1});
+                this._goToHome();
             },
             /**
              * @description 执行路由跳转|start-home
-             * @param query
              * @private
              */
-            _goToHome(query){
-                this.$router.push({name:'Home',query:query})
+            _goToHome(){
+                this.$router.push({name:'Home'})
             }
         }
     }
