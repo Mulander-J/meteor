@@ -1,57 +1,42 @@
-export const routes = [
+//  博客平台
+export const meteorRoute = [
+    //  博客站点
     {
-        path: '/',
-        name: 'meteor',
-        redirect:'/start'
-    },
-    {
-        //  开始页
-        path: '/start',
-        name: 'Start',
-        component: () => import('../views/start/Start.vue')
-    },
-    {
-        //  分享页
-        path: '/sharePage',
-        name: 'SharePage',
-        component: () => import('../views/share/SharePage.vue')
-    },
-    {
-        name:'Page',
-        path:'/page',
-        redirect:'/page/home',
+        name:'Meteor',
+        path:'/meteor',
+        redirect:'/meteor/home',
         component: () => import('@/components/layout/Page.vue'),
         children:[
             {
                 //  主页
                 path: 'home',
                 name: 'Home',
-                component: () => import('../views/page/home/Home.vue')
+                component: () => import('../views/front/home/Home.vue')
             },
             {
                 //  博客页
                 path: 'blog',
                 name: 'Blog',
-                component: () => import('../views/page/blog/Blog.vue')
+                component: () => import('../views/front/blog/Blog.vue')
             },
             {
                 //  书签页
                 path: 'bookmark',
                 name: 'BookMark',
                 component: () => import('@/components/layout/Blank.vue'),
-                redirect:'/page/bookmark/daily',
+                redirect:'/meteor/bookmark/daily',
                 children:[
                     {
                         //  常用书签
                         path: 'daily',
                         name: 'Daily',
-                        component: () => import('../views/page/bookmark/BookMark.vue')
+                        component: () => import('../views/front/bookmark/BookMark.vue')
                     },
                     {
                         //  开发书签
                         path: 'devil',
                         name: 'Devil',
-                        component: () => import('../views/page/bookmark/BookMark.vue')
+                        component: () => import('../views/front/bookmark/BookMark.vue')
                     }
                 ]
             },
@@ -59,49 +44,81 @@ export const routes = [
                 //  记录页
                 path: 'record',
                 name: 'Record',
-                redirect:'/page/record/recLog',
-                component: () => import('../views/page/record/Record.vue'),
+                redirect:'/meteor/record/recLog',
+                component: () => import('../views/front/record/Record.vue'),
                 children:[
                     {
                         //  开发日志
                         path: 'recLog',
                         name: 'RecLog',
-                        component: () => import('../views/page/record/RecLog.vue')
+                        component: () => import('../views/front/record/RecLog.vue')
                     },
                     {
-                        //  动漫
-                        path: 'animate',
-                        name: 'Animate',
-                        component: () => import('../views/page/record/RecMedia.vue')
-                    },
-                    {
-                        //  书籍
-                        path: 'book',
-                        name: 'Book',
-                        component: () => import('../views/page/record/RecMedia.vue')
-                    },
-                    {
-                        //  影视剧
-                        path: 'movie',
-                        name: 'Movie',
-                        component: () => import('../views/page/record/RecMedia.vue')
+                        //  多媒体
+                        path: 'media',
+                        name: 'Media',
+                        redirect:'/meteor/record/media/book',
+                        component: () => import('@/components/layout/Blank.vue'),
+                        children:[
+                            {
+                                //  书籍
+                                path: 'book',
+                                name: 'Book',
+                                component: () => import('../views/front/record/RecMedia.vue')
+                            },
+                            {
+                                //  影视剧
+                                path: 'movie',
+                                name: 'Movie',
+                                component: () => import('../views/front/record/RecMedia.vue')
+                            },
+                            {
+                                //  动漫
+                                path: 'animate',
+                                name: 'Animate',
+                                component: () => import('../views/front/record/RecMedia.vue')
+                            },
+                        ]
                     },
                     {
                         //  旅行
                         path: 'recMap',
                         name: 'RecMap',
-                        component: () => import('../views/page/record/RecMap.vue')
+                        component: () => import('../views/front/record/RecMap.vue')
                     },
                     {
                         //  票据
                         path: 'recTicket',
                         name: 'RecTicket',
-                        component: () => import('../views/page/record/RecTicket.vue')
+                        component: () => import('../views/front/record/RecTicket.vue')
                     },
                 ]
             }
         ]
-    }
+    },
+    //  分享页
+    {
+        //  分享页
+        path: '/share',
+        name: 'Share',
+        component: () => import('../views/share/share.vue')
+    },
+];
+//  管理平台
+export const adminRoute = [
+    {
+        //  管理页
+        path: '/admin',
+        name: 'Admin',
+        component: () => import('../views/admin/Admin.vue')
+    },
+    //  开始页-管理登录
+    {
+        //  开始页
+        path: '/start',
+        name: 'Start',
+        component: () => import('../views/start/Start.vue')
+    },
 ];
 export const navData = [
     {name:'Home'},
@@ -130,4 +147,16 @@ export const recMenu = [
     },
     {name:'RecMap',label:'旅行',children:null},
     {name:'RecTicket',label:'票据',children:null},
+];
+
+export const routes = [
+    //  根路径
+    {
+        path: '/',
+        name: 'zero',
+        redirect:'/meteor/home'
+    },
+    ...meteorRoute,
+    //  管理平台
+    ...adminRoute
 ];
