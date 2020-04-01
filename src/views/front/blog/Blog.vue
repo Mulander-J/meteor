@@ -30,6 +30,7 @@
                     <BlogLine v-if="list_blog.length>0" :data="list_blog"
                               @on-favor="_handleFavor"
                               @on-photo="_handlePhoto"
+                              @on-share="_handleShare"
                               @on-blog="_handleBlog"/>
                     <span v-else>暂无文章</span>
                 </transition>
@@ -316,10 +317,17 @@
             /*  点赞博客  */
             _handleFavor(item){
                 console.log('_handleFavor',item);
+                alert('_handleFavor')
             },
             /*  获取博客快照    */
             _handlePhoto(item){
                 console.log('_handlePhoto',item);
+                alert('_handlePhoto')
+            },
+            /*  获取博客分享地址    */
+            _handleShare(item){
+                console.log('_handleShare',item);
+                alert(`${this.$conf.appBaseUrl}/share?id=${item.id}`)
             },
             _tree_click(data,node,vNode){
                 console.log(data, node, vNode);

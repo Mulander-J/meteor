@@ -23,8 +23,8 @@
         <!--    初始化对话框  -->
         <el-dialog  title="Start" :visible.sync="isShow">
             <div>
-                开始配置
-                <el-button @click="handleStart">开始</el-button>
+                博客管理平台-登录
+                <el-button @click="handleStart">登录</el-button>
             </div>
         </el-dialog>
     </section>
@@ -80,7 +80,7 @@
              */
             handleStart(){
                 this.isShow = false;
-                localStorage.setItem('meteor_user',JSON.stringify({userId:1}));
+                // localStorage.setItem('meteor_user',JSON.stringify({userId:1}));
                 this._goToHome();
             },
             /**
@@ -88,7 +88,7 @@
              * @private
              */
             _goToHome(){
-                this.$router.push({name:'Home'})
+                this.$router.push({name:'Admin'})
             }
         }
     }
