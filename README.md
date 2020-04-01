@@ -256,7 +256,7 @@ export const routes = [
 
 - 开始页-白天
 
-![start_day](https://github.com/Mulander-J/meteor/blob/master/explain/img//start_day.jpg)
+![start_day](https://github.com/Mulander-J/meteor/blob/master/explain/img/start_day.jpg)
 
 - 开始页-黑夜
 
