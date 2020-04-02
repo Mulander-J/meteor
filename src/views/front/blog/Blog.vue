@@ -71,6 +71,7 @@
                                 children:[
                                     {  id:'2',name:'console'},
                                     {  id:'3',name:'digest'},
+                                    {  id:'7',name:'leetcode'},
                                 ]
                             },
                             {
@@ -84,6 +85,10 @@
                             {
                                 id:'8',
                                 name:'Named'
+                            },
+                            {
+                                id:'9',
+                                name:'unclassified'
                             }
                         ]
                     }

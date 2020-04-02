@@ -8,6 +8,14 @@
 - /api/bookmark
 - /api/record
 
+————————————————————————————
+Create|Retrieve|Update|Delete
+
+tag:CRU
+cat:CRUD
+blog:CRUD
+bookmark:CRUD
+
 ## 开始/登录页
 - /start
 
