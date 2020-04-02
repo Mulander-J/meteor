@@ -33,6 +33,10 @@
 <script>
     import {mapGetters} from 'vuex'
     import {skyCircle} from '@/plugin/canvas'
+    const Debugger = require('debug');
+    const a = Debugger('worker:a');
+
+
     export default {
         name: "Start",
         data(){
@@ -52,6 +56,7 @@
           }
         },
         mounted () {
+            a('doing lots of uninteresting work');
             this.initDayNight()
         },
         methods:{

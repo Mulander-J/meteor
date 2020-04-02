@@ -1,7 +1,7 @@
 export const navData = [
     {name:'Home'},
     {name:'Blog'},
-    {name:'Record'},
+    // {name:'Record'},
     {
         name:'BookMark',
         children:[
