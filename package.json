@@ -54,8 +54,11 @@
     "express": "^4.17.1",
     "http-errors": "^1.7.3",
     "less": "^3.0.4",
+    "express-validator": "^6.4.0",
     "less-loader": "^5.0.0",
     "morgan": "^1.10.0",
+    "winston": "^3.2.1",
+    "express-winston": "^4.0.3",
     "vue-particles": "^1.0.9",
     "vue-template-compiler": "^2.6.11"
   }
