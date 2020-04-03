@@ -23,7 +23,7 @@ export default {
     "appBaseUrl":'www.mulander_blog.com',
     //  导航信息
     "nav":{
-        showHelp:false, //  是否显示帮助链接
+        showHelp:true, //  是否显示帮助链接
         data:navData    //  导航数据
     },
     //  rec菜单

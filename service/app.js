@@ -7,24 +7,39 @@ var logger = require('morgan');
 var ejs = require('ejs');
 var cors = require('cors');
 var http = require('http');
-// var winston = require('winston');
-// var expressWinston = require('express-winston');
+var mongoose = require('mongoose');
+var winston = require('winston');
+var expressWinston = require('express-winston');
+
 //  引入路由接口
 var routers = require('./routes');
 //  引入配置文件
 const config_default = require('./config/default.js');
+//  连接数据库
+var db = mongoose.connection;
+//  监听是否有异常
+db.on('error', function callback() {console.log("**** Connection error")});
+//  连接成功
+db.on("connected",function () {console.log(`**** 数据库表[${config_default.dbName}]连接成功`)});
+//  连接数据库
+// mongoose.connect('mongodb://数据库登录用户名:数据库登录密码@数据库连接地址')
+mongoose.connect(config_default.mongodb, {
+    "useNewUrlParser": true ,   //  地址处理
+    "useUnifiedTopology": true  //  解除警告
+});
 //  定义express应用
 var app = express();
 //  设置 host&port
 app.set('host', config_default.host);
 app.set('port', config_default.port);
-// view engine setup
+// 配置模板引擎
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.html',ejs.__express); //引用ejs引擎
 app.set('view engine', 'html');
 app.use(logger('dev'));
+//  调用中间件
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 //  设置公用资源地址
 // app.use(express.static(path.join(__dirname, 'public')));
@@ -36,30 +51,30 @@ routers(app);
 // 引入swagger
 var setSwagger = require ('./swagger');
 setSwagger(app);
-// // 正常请求的日志
-// app.use(expressWinston.logger({
-//     transports: [
-//         new (winston.transports.Console)({
-//             json: true,
-//             colorize: true
-//         }),
-//         new winston.transports.File({
-//             filename: 'logs/success.log'
-//         })
-//     ]
-// }));
-// // 错误请求的日志
-// app.use(expressWinston.errorLogger({
-//     transports: [
-//         new winston.transports.Console({
-//             json: true,
-//             colorize: true
-//         }),
-//         new winston.transports.File({
-//             filename: 'logs/error.log'
-//         })
-//     ]
-// }));
+// 正常请求的日志
+app.use(expressWinston.logger({
+    transports: [
+        new (winston.transports.Console)({
+            json: true,
+            colorize: true
+        }),
+        new winston.transports.File({
+            filename: './logs/success.log'
+        })
+    ]
+}));
+// 错误请求的日志
+app.use(expressWinston.errorLogger({
+    transports: [
+        new winston.transports.Console({
+            json: true,
+            colorize: true
+        }),
+        new winston.transports.File({
+            filename: './logs/error.log'
+        })
+    ]
+}));
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     next(createError(404));
@@ -118,5 +133,11 @@ function onListening() {
     var bind = typeof addr === 'string'
         ? 'pipe ' + addr
         : 'port ' + addr.port;
-    console.log(`${hello.ctx}\n${config_default.name} | Listening on ${bind}\n${hello.line}`);
+    console.log([
+        `${hello.ctx}`,
+        `${hello.line}`,
+        `${config_default.name} | Listening on ${bind}`,
+        `${hello.line}`,
+    ].join('\n'));
+
 }
