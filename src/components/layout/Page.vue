@@ -7,9 +7,7 @@
         <div class="meteor-scroll-unStart">
             <el-scrollbar>
                 <!--  路由页  -->
-                <keep-alive :include="aliveList">
-                    <router-view/>
-                </keep-alive>
+                <router-view/>
                 <!--    粒子背景    -->
                 <vue-particles class="meteor-particle"
                                color="#3eaf7c"
@@ -39,12 +37,7 @@
     import HeaderBox from './header/HeaderBox'
     export default {
         name: "Page",
-        components:{HeaderBox,VueParticles},
-        data(){
-            return {
-                aliveList:['Home']
-            }
-        }
+        components:{HeaderBox,VueParticles}
     }
 </script>
 

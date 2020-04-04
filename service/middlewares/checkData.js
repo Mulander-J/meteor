@@ -1,5 +1,5 @@
 module.exports={
-    valCheck : (req,validator={validationResult:(v)=>v})=>{
+    valCheck : (req,codeDic,validator={validationResult:(v)=>v})=>{
         if(!req.body){
             return {
                 ...codeDic.ERROR_NULL

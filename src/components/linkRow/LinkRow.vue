@@ -1,27 +1,22 @@
 <template>
    <div class="meteor-linkRow">
-       <h1 :id="linkData.title" class="meteor-txtGradient">
-           <a :href="'#'+linkData.title" aria-hidden="true" class="meteor-header-anchor">#</a>
-           <span>{{linkData.title}}</span>
-       </h1>
-       <blockquote>最后更新:{{linkData.lastUpdate}}</blockquote>
-       <blockquote>{{linkData.desc}}</blockquote>
-       <div class="page-resource" v-for="(row,key,rowIndex) in linkData.list" :key="'linkRow_'+rowIndex">
-           <h2 :id="key">
-               <a :href="'#'+key" aria-hidden="true" class="meteor-header-anchor">#</a>
-               <span>{{key}}</span>
-               <span class="item-list-count">/_{{row.length}}</span>
+       <div class="page-resource" v-for="(row,rowIndex) in linkData" :key="'linkRow_'+rowIndex">
+           <h2 :id="row[groupKey]">
+               <a :href="'#'+row[groupKey]" aria-hidden="true" class="meteor-header-anchor">#</a>
+               <span>{{row[groupKey]}}</span>
+               <span class="item-list-count">/_{{row.group.length}}</span>
            </h2>
            <div class="item-list">
-               <transition-group name="el-zoom-in-center" class="item-box">
-                   <a class="item" :class="{'item-wall':item.outWall}"
-                      v-for="(item,inIndex) in row" :key="item.title+'_'+inIndex"
-                      :href="item.links" :title="item.desc" target="_blank">
+               <transition-group name="el-fade-in-linear" class="item-box">
+                   <a class="item" target="_blank"
+                      v-for="(item,inIndex) in row.group" :key="item.name+'_'+inIndex"
+                      :class="{'item-wall':item.outWall}"
+                      :href="item.link" :title="item.desc">
                        <div class="left">
                            <img src="/img/refs/default.png" alt="">
                        </div>
                        <div class="right">
-                           <div class="title meteor-text-upper">{{item.title}}</div>
+                           <div class="title meteor-text-upper">{{item.name}}</div>
                            <div class="des">{{item.desc}}</div>
                        </div>
                    </a>
@@ -35,15 +30,14 @@
     export default {
         name:"LinkRow",
         props:{
+            groupKey:{
+                type:String,
+                default:"cats"
+            },
             linkData:{
-                type:Object,
+                type:Array,
                 default:()=>{
-                    return {
-                        title:'',
-                        desc:'',
-                        lastUpdate:'',
-                        list:[]
-                    }
+                    return [{cats:'a',group:[]}]
                 }
             }
         }

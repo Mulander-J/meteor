@@ -54,6 +54,12 @@
 - express 启动字符画
 ### day2
 - PicGo本地图床
-- bookmark list/add
+- bookmark list/save/delete
 - swagger-yaml
-- code-errorCode
+- code-errorCode定义
+### day3
+- async/await改写异步
+- try-catch异常捕获
+- express-winston 日志中间件
+- 书签导入
+- 书签分组

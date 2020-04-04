@@ -87,6 +87,10 @@
                                 name:'Named'
                             },
                             {
+                                id:'10',
+                                name:'Travel'
+                            },
+                            {
                                 id:'9',
                                 name:'unclassified'
                             }

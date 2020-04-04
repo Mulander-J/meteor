@@ -1,6 +1,6 @@
 <template>
     <div>
-        RecMedia -{{$route.name}}
+        RecMedia
     </div>
 </template>
 

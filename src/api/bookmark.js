@@ -3,8 +3,11 @@ import axiosMan from './axiosMan'
 const parseUrl = '/api/confBookmark';
 
 export default {
-    list:()=>{
-        return axiosMan.get(`${parseUrl}/list`)
+    list:(parameters)=>{
+        return axiosMan.post(`${parseUrl}/list`,parameters)
+    },
+    page:(parameters)=>{
+        return axiosMan.get(`${parseUrl}/page`,parameters)
     },
     save:(parameters)=>{
         return axiosMan.post(`${parseUrl}/save`,parameters)
