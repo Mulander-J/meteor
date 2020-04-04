@@ -9,8 +9,9 @@ module.exports =  [
                     "async/await改写异步",
                     "try-catch异常捕获",
                     "express-winston 日志中间件",
-                    "书签导入",
-                    "书签分组"
+                    "书签录入数据库",
+                    "书签分组展示",
+                    "record/log页"
                 ]
             },
             {
