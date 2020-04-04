@@ -33,9 +33,6 @@
 <script>
     import {mapGetters} from 'vuex'
     import {skyCircle} from '@/plugin/canvas'
-    const Debugger = require('debug');
-    const a = Debugger('worker:a');
-
 
     export default {
         name: "Start",
@@ -56,7 +53,6 @@
           }
         },
         mounted () {
-            a('doing lots of uninteresting work');
             this.initDayNight()
         },
         methods:{
@@ -93,7 +89,7 @@
              * @private
              */
             _goToHome(){
-                this.$router.push({name:'Admin'})
+                this.$router.push({name:'Home'})
             }
         }
     }

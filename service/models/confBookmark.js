@@ -1,14 +1,18 @@
 let mongoose = require('mongoose');
-let Schema = mongoose.Schema;
 /*  书签实体对象  */
-module.exports = mongoose.model("confBookmark",new Schema({
-    name:String,    //  名称
+module.exports = mongoose.model("confBookmark",new mongoose.Schema({
+    name:{type:String,required:true},    //  名称
+    link:{type:String,required:true},    //  链接
     desc:String,    //  简述
-    link:String,    //  链接
     icon:String,    //  图标
     cats:String,    //  类目
     type:String,    //  类型
     remark:String,  //  备注
-    digested:Number,    //  是否消化0-否/1-是
-    timeStamp:{type:Date,default:Date.now()}   //  创建日期
+    digested:{type:Number,default:0},    //  是否消化0-否/1-是
+    outWall:{type:Number,default:0},    //  是否翻墙0-否/1-是
+},{
+    timestamps: {
+        createdAt: '_created',
+        updatedAt: '_updated'
+    }
 }),"conf_bookmark");

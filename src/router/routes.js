@@ -1,71 +1,39 @@
 export const navData = [
     {name:'Home'},
     {name:'Blog'},
-    // {name:'Record'},
+    {
+        name:'Record',
+        children:[
+            {name:'Log',},
+            {name:'Media'},
+            {name:'Ticket'}
+        ]
+    },
     {
         name:'BookMark',
         children:[
             {name:'Daily',},
-            {name:'Devil'}
+            {name:'Devil'},
+            {name:'Digest'}
         ]
     }
 ];
-export const recMenu = [
-    {
-        //  开发日志
-        path: 'recLog',
-        name: 'RecLog',
-        meta:{title:'开发日志'},
-        component: () => import('../views/front/record/RecLog.vue')
-    },
-    {
-        //  多媒体
-        path: 'media',
-        name: 'Media',
-        meta:{title:'多媒体'},
-        redirect:'/meteor/record/media/book',
-        component: () => import('@/components/layout/Blank.vue'),
-        children:[
-            {
-                //  书籍
-                path: 'book',
-                name: 'Book',
-                meta:{title:'书籍'},
-                component: () => import('../views/front/record/RecMedia.vue')
-            },
-            {
-                //  动漫
-                path: 'animate',
-                name: 'Animate',
-                meta:{title:'动漫'},
-                component: () => import('../views/front/record/RecMedia.vue')
-            },
-            {
-                //  影视剧
-                path: 'movie',
-                name: 'Movie',
-                meta:{title:'影视剧'},
-                component: () => import('../views/front/record/RecMedia.vue')
-            }
-        ]
-    },
-    {
-        //  旅行
-        path: 'recMap',
-        name: 'RecMap',
-        meta:{title:'旅行'},
-        component: () => import('../views/front/record/RecMap.vue')
-    },
-    {
-        //  票据
-        path: 'recTicket',
-        name: 'RecTicket',
-        meta:{title:'票剧'},
-        component: () => import('../views/front/record/RecTicket.vue')
-    },
-];
 //  博客平台
 export const meteorRoute = [
+    //  开始页-管理登录
+    {
+        //  开始页
+        path: '/start',
+        name: 'Start',
+        component: () => import('../views/start/Start.vue')
+    },
+    //  分享页
+    {
+        //  分享页
+        path: '/share',
+        name: 'Share',
+        component: () => import('../views/share/share.vue')
+    },
     //  博客站点
     {
         name:'Meteor',
@@ -96,13 +64,19 @@ export const meteorRoute = [
                         //  常用书签
                         path: 'daily',
                         name: 'Daily',
-                        component: () => import('../views/front/bookmark/BookMark.vue')
+                        component: () => import('../views/front/bookmark/Daily.vue')
                     },
                     {
                         //  开发书签
                         path: 'devil',
                         name: 'Devil',
-                        component: () => import('../views/front/bookmark/BookMark.vue')
+                        component: () => import('../views/front/bookmark/Devil.vue')
+                    },
+                    {
+                        //  开发书签
+                        path: 'digest',
+                        name: 'Digest',
+                        component: () => import('../views/front/bookmark/Digest.vue')
                     }
                 ]
             },
@@ -111,17 +85,32 @@ export const meteorRoute = [
                 path: 'record',
                 name: 'Record',
                 redirect:'/meteor/record/recLog',
-                component: () => import('../views/front/record/Record.vue'),
-                children:recMenu
+                component: () => import('@/components/layout/Blank.vue'),
+                children:[
+                    {
+                        //  开发日志
+                        path: 'recLog',
+                        name: 'Log',
+                        meta:{title:'开发日志'},
+                        component: () => import('../views/front/record/RecLog.vue')
+                    },
+                    {
+                        //  多媒体
+                        path: 'media',
+                        name: 'Media',
+                        meta:{title:'多媒体'},
+                        component: () => import('../views/front/record/RecMedia.vue')
+                    },
+                    {
+                        //  票据
+                        path: 'recTicket',
+                        name: 'Ticket',
+                        meta:{title:'票剧'},
+                        component: () => import('../views/front/record/RecTicket.vue')
+                    }
+                ]
             }
         ]
-    },
-    //  分享页
-    {
-        //  分享页
-        path: '/share',
-        name: 'Share',
-        component: () => import('../views/share/share.vue')
     },
 ];
 //  管理平台
@@ -131,14 +120,7 @@ export const adminRoute = [
         path: '/admin',
         name: 'Admin',
         component: () => import('../views/admin/Admin.vue')
-    },
-    //  开始页-管理登录
-    {
-        //  开始页
-        path: '/start',
-        name: 'Start',
-        component: () => import('../views/start/Start.vue')
-    },
+    }
 ];
 
 export const routes = [
@@ -146,8 +128,9 @@ export const routes = [
     {
         path: '/',
         name: 'zero',
-        redirect:'/meteor/home'
+        redirect:'/meteor/start'
     },
+    //  博客平台
     ...meteorRoute,
     //  管理平台
     ...adminRoute

@@ -1,5 +1,5 @@
 import * as packageInfo from './../../package.json'
-import {navData,recMenu} from './../router/routes.js'
+import {navData} from './../router/routes.js'
 
 export default {
     //  应用信息
@@ -18,7 +18,7 @@ export default {
         "segment":"https://segmentfault.com/u/mulander",
         "outlook":"mailto:mulander_j@outlook.com"
     },
-    "adminHome":"/start",
+    "adminHome":"/admin",
     "appHome":"/meteor/home",
     "appBaseUrl":'www.mulander_blog.com',
     //  导航信息
@@ -26,8 +26,6 @@ export default {
         showHelp:true, //  是否显示帮助链接
         data:navData    //  导航数据
     },
-    //  rec菜单
-    "recMenu":recMenu,
     //  首页信息
     "homeLabel":{
         header:{
@@ -53,5 +51,9 @@ export default {
         location:'Shanghai,China',
         mail_1:'mulander_j@outlook.com',
         mail_2:'mulander@qq.com',
+    },
+    //  书签页信息
+    "bookmark":{
+        "lastUpdate":"2020/04/03"
     }
 }

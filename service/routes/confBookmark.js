@@ -13,10 +13,11 @@ const defaultPattern = {
     desc:"不可描述",
     link:"",
     icon:"default",
-    cats:"UnClassified",
-    type:"daily",
+    cats:"unclassified",
+    type:"Digest",
     remark:"",
-    digested:0
+    digested:0,
+    outWall:0
 };
 
 /**
@@ -40,40 +41,48 @@ const defaultPattern = {
  *         type: string
  *       digested:
  *         type: integer
- *       timeStamp:
- *         type: date
+ *       outWall:
+ *         type: integer
  */
 
 /**
  * @swagger
  * /api/confBookMark/list:
- *   get:
+ *   post:
  *     tags:
  *       - confBookMark
  *     summary: 全量列表
  *     description: 用于获取全量列表-书签
+ *     parameters:
+ *       - name: Bookmark
+ *         description: ConfBookmark object
+ *         in: body
+ *         required: true
+ *         schema:
+ *           $ref: '#/definitions/ConfBookmark'
  *     responses:
  *       200:
  *         description: 【成功】
  */
-router.get('/list', (req, res) => {
-    confBookmark.find({}, (err, doc) =>{
-        if (err) {
-            console.log(`# 请求|列表-书签|失败`);
-            res.json({
-                ...codeDic.ERROR_GLOBAL,
-                total:0,
-                result:[]
-            });
-        } else {
-            console.log(`# 请求|列表-书签|成功`);
-            res.json({
-                ...codeDic.SUCCESS_GLOBAL,
-                total: doc.length,
-                result: doc
-            });
-        }
-    })
+router.post('/list', async (req, res) => {
+    try {
+        let parameters = req.body;
+        let doc = await  confBookmark.find(parameters).sort('cats');
+        console.log(`# 请求|书签-列表|成功`);
+        res.json({
+            ...codeDic.SUCCESS_GLOBAL,
+            total: doc.length,
+            result: doc
+        });
+    }catch (err) {
+        console.log(`# 请求|书签-列表|失败`);
+        res.json({
+            ...codeDic.ERROR_GLOBAL,
+            msg:err.message,
+            total:0,
+            result:[]
+        });
+    }
 });
 
 /**
@@ -104,72 +113,62 @@ router.post('/save',
         validator.check('cats').exists({checkFalsy:true,checkNull:true}).withMessage('不能为空'),
         validator.check('type').exists({checkFalsy:true,checkNull:true}).withMessage('不能为空'),
         validator.check('digested').isInt({min:0,max:1}).withMessage('必须为0/1'),
+        validator.check('outWall').isInt({min:0,max:1}).withMessage('必须为0/1'),
     ],
-    (req, res) => {
-        let  preVal =  checkData.valCheck(req,validator);
-        if(preVal){
-            res.json(preVal);
-        }else {
-            let pattern = {
-                ...defaultPattern,
-                ...req.body,
-                timeStamp:Date.now()
-            };
-            confBookmark.findOne({name:pattern.name},(err,mark)=>{
+    async (req, res) => {
+        try {
+            let  preVal =  checkData.valCheck(req,codeDic,validator);
+            if(preVal){
+                console.log(`# 请求|书签-保存|异常参数`);
+                res.json(preVal);
+            }else {
+                let pattern = {
+                    ...defaultPattern,
+                    ...req.body
+                };
+                let doc = null;
+                let mark =  await confBookmark.findOne({name:pattern.name});
                 if(pattern._id){    //  修改
                     if(mark&&pattern._id!==mongoose.Types.ObjectId(mark._id).toString()){
-                        console.log(`# 请求|修改-书签|重名`);
+                        console.log(`# 请求|书签-修改|重名-${pattern.name}`);
                         res.json({
                             ...codeDic.ERROR_UNIQUE,
                             msg:'名称已存在，请修改',
                             result:mark
                         });
                     }else {
-                        confBookmark.updateOne(pattern,(err,doc)=>{
-                            if (err) {
-                                console.log(`# 请求|修改-书签|失败`);
-                                res.json({
-                                    ...codeDic.ERROR_GLOBAL,
-                                    msg: err.message,
-                                    result:doc
-                                });
-                            } else {
-                                console.log(`# 请求|修改-书签|成功`);
-                                res.json({
-                                    ...codeDic.SUCCESS_SAVE,
-                                    result:doc
-                                });
-                            }
-                        })
+                        doc = await confBookmark.updateOne(pattern);
+                        console.log(`# 请求|书签-修改|成功-${pattern.name}`);
+                        res.json({
+                            ...codeDic.SUCCESS_SAVE,
+                            result:doc
+                        });
                     }
                 }else { //  新建
                     if(mark){
-                        console.log(`# 请求|新建-书签|重名`);
+                        console.log(`# 请求|书签-新建|重名-${pattern.name}`);
                         res.json({
                             ...codeDic.ERROR_UNIQUE,
                             msg:'名称已存在，请修改',
                             result:mark
                         });
                     }else {
-                        new confBookmark(pattern).save( (err, doc)=> {
-                            if (err) {
-                                console.log(`# 请求|新建-书签|失败`);
-                                res.json({
-                                    ...codeDic.ERROR_GLOBAL,
-                                    msg: err.message,
-                                    result:doc
-                                });
-                            } else {
-                                console.log(`# 请求|新建-书签|成功`);
-                                res.json({
-                                    ...codeDic.SUCCESS_SAVE,
-                                    result:doc
-                                });
-                            }
-                        })
+                        doc = await new confBookmark(pattern).save();
+                        console.log(`# 请求|书签-新建|成功-${pattern.name}`);
+                        res.json({
+                            ...codeDic.SUCCESS_SAVE,
+                            result:doc
+                        });
                     }
                 }
-            });
+            }
+        }catch (err) {
+            console.log(`# 请求|书签-保存|失败`);
+            res.json({
+                ...codeDic.ERROR_GLOBAL,
+                msg:err.message,
+                result:null
+            })
         }
     }
 );
@@ -194,27 +193,27 @@ router.post('/save',
  */
 router.get('/delete',
     [validator.check('ids').exists({checkFalsy:true,checkNull:true}).withMessage('不能为空')],
-    (req, res) => {
-        let  preVal =  checkData.valCheck(req,validator);
-        if(preVal) {
-            res.json(preVal);
-        }else {
-            let ids = req.query.ids.split(",").filter(Boolean);
-            confBookmark.deleteMany({ _id: { $in:ids } },(err,doc)=>{
-                if(err){
-                    console.log(`# 请求|删除-书签|失败`);
-                    res.json({
-                        ...codeDic.ERROR_GLOBAL,
-                        msg:err.message,
-                        result:doc
-                    })
-                }else {
-                    console.log(`# 请求|删除-书签|成功`);
-                    res.json({
-                        ...codeDic.SUCCESS_DELETE,
-                        result:doc
-                    })
-                }
+    async (req, res) => {
+        try {
+            let  preVal =  checkData.valCheck(req,codeDic,validator);
+            if(preVal) {
+                console.log(`# 请求|书签-删除|异常参数`);
+                res.json(preVal);
+            }else {
+                let ids = req.query.ids.split(",").filter(Boolean);
+                let doc =  await confBookmark.deleteMany({ _id: { $in:ids } });
+                console.log(`# 请求|书签-删除|成功`);
+                res.json({
+                    ...codeDic.SUCCESS_DELETE,
+                    result:doc
+                });
+            }
+        }catch (err) {
+            console.log(`# 请求|书签-删除|失败`);
+            res.json({
+                ...codeDic.ERROR_GLOBAL,
+                msg:err.message,
+                result:null
             })
         }
     }

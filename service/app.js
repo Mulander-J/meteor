@@ -46,11 +46,6 @@ app.use(cookieParser());
 app.use(express.static(path.resolve(__dirname, './../dist')));
 //  支持跨域
 app.use(cors());
-//  装填路由
-routers(app);
-// 引入swagger
-var setSwagger = require ('./swagger');
-setSwagger(app);
 // 正常请求的日志
 app.use(expressWinston.logger({
     transports: [
@@ -59,10 +54,15 @@ app.use(expressWinston.logger({
             colorize: true
         }),
         new winston.transports.File({
-            filename: './logs/success.log'
+            filename: path.join(__dirname, './logs/success.log')
         })
     ]
 }));
+//  装填路由
+routers(app);
+// 引入swagger
+var setSwagger = require ('./swagger');
+setSwagger(app);
 // 错误请求的日志
 app.use(expressWinston.errorLogger({
     transports: [
@@ -71,7 +71,7 @@ app.use(expressWinston.errorLogger({
             colorize: true
         }),
         new winston.transports.File({
-            filename: './logs/error.log'
+            filename: path.join(__dirname, './logs/error.log')
         })
     ]
 }));

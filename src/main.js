@@ -16,6 +16,9 @@ import "./assets/style/layout.less"
 //  跨域请求
 import VueJsonp from 'vue-jsonp'
 Vue.use(VueJsonp)
+//  util工具
+import util from './util'
+Vue.prototype.$util = util
 //  api接口
 import api from './api'
 Vue.prototype.$api = api

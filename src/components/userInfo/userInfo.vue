@@ -1,6 +1,6 @@
 <template>
     <section>
-        {{$conf.userInfo}}
+        <p v-for="(v,k,n) in $conf.userInfo" :key="n">{{k}}:{{v}}</p>
     </section>
 </template>
 
