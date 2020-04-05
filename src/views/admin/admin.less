@@ -1,0 +1,34 @@
+@font-face {
+  font-family:'Decovar Regular24';
+  src:url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/209981/Decovar-VF.ttf');
+}
+.meteor-admin-wrapper{
+  background: linear-gradient(to right, #8e9eab, #eef2f3);
+  .el-header, .el-footer {
+    color: #333;
+    text-align: center;
+    line-height: 60px;
+  }
+  .el-aside {
+    background-color:transparent;
+    line-height: 200px;
+    .el-menu-item.is-active {
+      background-color: #eef2f3 !important;
+    }
+  }
+  .el-main {
+    background-color: #ffffff;
+  }
+  .admin-header{
+    box-shadow: 0 1px 10px 2px #000;
+    z-index: 2;
+    .admin-header-link{
+        font-size: 2rem;
+        text-transform: uppercase;
+        color: #FFF;
+    }
+    .admin-header-poet{
+      background-image: -webkit-linear-gradient(left, #0d9ee4, #333 25%, #0d9ee4 50%, #333 75%, #0d9ee4);
+    }
+  }
+}

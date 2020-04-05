@@ -1,48 +1,70 @@
 <template>
-    <div>
-        <h1>Admin</h1>
-        <div style="padding: 2rem">
-            <router-link :to="{name:'Home'}">home</router-link>
-        </div>
-        <div>
-            <button @click="addBookmark2">addBookmark2</button>
-            <button @click="deleteBook">deleteBook</button>
-        </div>
-    </div>
+    <el-container class="meteor-admin-wrapper">
+        <el-header class="admin-header meteor-flex-between">
+            <a class="admin-header-link" :data-text="$conf.name" :href="$conf.appHome">{{$conf.name}}</a>
+            <span class="meteor-txtGradient admin-header-poet">{{poet}}</span>
+            <el-dropdown  class="meteor-flex-center">
+                <el-avatar :src="$conf.headImg"></el-avatar>
+                <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item>个人中心</el-dropdown-item>
+                    <el-dropdown-item>设置</el-dropdown-item>
+                    <el-dropdown-item>注销</el-dropdown-item>
+                </el-dropdown-menu>
+            </el-dropdown>
+        </el-header>
+        <el-container>
+            <el-aside width="200px">
+                <el-menu :router="true" style="border-right:none"
+                         background-color="transparent"
+                         text-color="#fff"
+                         active-text-color="#333">
+                    <el-menu-item v-for="(men,menNo) in $conf.nav.adminRou" :key="menNo" :index="men.name">
+                        <i :class="men.meta.icon" style="color: inherit;"></i>
+                        <span slot="title">{{men.meta.title}}</span>
+                    </el-menu-item>
+                </el-menu>
+            </el-aside>
+            <el-container class="meteor-scroll-admin">
+                <el-main style="height: calc(100vh - 120px)">
+                    <el-scrollbar>
+                        <router-view/>
+                        <!--  回到顶部  -->
+                        <el-backtop target=".meteor-scroll-admin .el-scrollbar__wrap" style="z-index: 100"/>
+                    </el-scrollbar>
+                </el-main>
+                <el-footer>This is a footer , dont del me</el-footer>
+            </el-container>
+        </el-container>
+    </el-container>
 </template>
 
 <script>
+    const jinrishici =require('jinrishici');
+
     export default {
         name: "Admin",
+        data(){
+            return {
+                poet:''
+            }
+        },
+        mounted(){
+          this._getJinrishici()
+        },
         methods:{
-            addBookmark2(){
-                this.$api.bookmark.save({
-                    name:"node内存溢出解决方案",
-                    desc:"不可描述",
-                    link:"https://segmentfault.com/a/1190000018557398",
-                    icon:"default.jpg",
-                    cats:"unclassified",
-                    type:"Digest",
-                    outWall:0,
-                    digested:0
-                }).then(res=>{
-                    console.log(res);
-                }).catch(err=>{
+            _getJinrishici(){
+                let THAT = this;
+                jinrishici.load(result => {
+                    THAT.poet = result.data.content+'-'+result.data.origin.author;
+                }, err => {
                     console.log(err);
+                    THAT.poet ='' ;
                 })
-            },
-            deleteBook(){
-                this.$api.bookmark.delete('1')
-                    .then(res=>{
-                    console.log(res);
-                    }).catch(err=>{
-                        console.log(err);
-                    })
             }
         }
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+    @import "./admin.less";
 </style>

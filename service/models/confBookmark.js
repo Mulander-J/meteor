@@ -8,8 +8,8 @@ module.exports = mongoose.model("confBookmark",new mongoose.Schema({
     cats:String,    //  类目
     type:String,    //  类型
     remark:String,  //  备注
-    digested:{type:Number,default:0},    //  是否消化0-否/1-是
-    outWall:{type:Number,default:0},    //  是否翻墙0-否/1-是
+    digested:String,    //  是否消化0-否/1-是
+    outWall:String    //  是否翻墙0-否/1-是
 },{
     timestamps: {
         createdAt: '_created',
