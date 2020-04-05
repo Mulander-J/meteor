@@ -119,7 +119,46 @@ export const adminRoute = [
         //  管理页
         path: '/admin',
         name: 'Admin',
-        component: () => import('../views/admin/Admin.vue')
+        redirect:'/admin/adBlog',
+        component: () => import('../views/admin/Admin.vue'),
+        children:[
+            {
+                path: 'adBlog',
+                name: 'AdBlog',
+                meta:{title:'博客管理',icon:'el-icon-notebook-2'},
+                component: () => import('../views/admin/model/AdBookmark.vue'),
+            },
+            {
+                path: 'adTag',
+                name: 'AdTag',
+                meta:{title:'标签管理',icon:'el-icon-discount'},
+                component: () => import('../views/admin/model/AdBookmark.vue'),
+            },
+            {
+                path: 'adCats',
+                name: 'AdCats',
+                meta:{title:'类目管理',icon:'el-icon-coin'},
+                component: () => import('../views/admin/model/AdBookmark.vue'),
+            },
+            {
+                path: 'adBookmark',
+                name: 'AdBookmark',
+                meta:{title:'书签管理',icon:'el-icon-collection'},
+                component: () => import('../views/admin/model/AdBookmark.vue'),
+            },
+            {
+                path: 'adRecord',
+                name: 'AdRecord',
+                meta:{title:'记录管理',icon:'el-icon-receiving'},
+                component: () => import('../views/admin/model/AdBookmark.vue'),
+            },
+            {
+                path: 'adToDo',
+                name: 'AdToDo',
+                meta:{title:'备忘摘要',icon:'el-icon-document'},
+                component: () => import('../views/admin/model/AdBookmark.vue'),
+            }
+        ]
     }
 ];
 
@@ -128,7 +167,7 @@ export const routes = [
     {
         path: '/',
         name: 'zero',
-        redirect:'/meteor/start'
+        redirect:'/start'
     },
     //  博客平台
     ...meteorRoute,

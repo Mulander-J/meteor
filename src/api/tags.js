@@ -1,8 +1,11 @@
 import axiosMan from './axiosMan'
 
-const parseUrl = '/api/confBookmark';
+const parseUrl = '/api/confTag';
 
 export default {
+    delete:(ids)=>{
+        return axiosMan.get(`${parseUrl}/delete?ids=${ids||''}`)
+    },
     list:(parameters)=>{
         return axiosMan.post(`${parseUrl}/list`,parameters)
     },
@@ -12,7 +15,4 @@ export default {
     save:(parameters)=>{
         return axiosMan.post(`${parseUrl}/save`,parameters)
     },
-    delete:(ids)=>{
-        return axiosMan.get(`${parseUrl}/delete?ids=${ids||''}`)
-    }
 };

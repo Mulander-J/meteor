@@ -1,9 +1,9 @@
-var mongoose = require("mongoose");
 var express = require('express');
 var router = express.Router();
 
 //  引入状态码/错误码
 var codeDic = require('./../config/req_code');
+//  引入开发日志
 var log = require('./../../explain/log');
 
 

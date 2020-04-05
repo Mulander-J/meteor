@@ -1,5 +1,5 @@
 import * as packageInfo from './../../package.json'
-import {navData} from './../router/routes.js'
+import {navData,adminRoute} from './../router/routes.js'
 
 export default {
     //  应用信息
@@ -13,6 +13,7 @@ export default {
     "homepage":packageInfo.homepage,
     "repository":packageInfo.repository.url.replace('git+',''),
     "createDate":"2020.03.12",
+    "headImg":"https://cdn.jsdelivr.net/gh/Mulander-J/mdpic/img/20200403134530.gif",
     "contact":{
         "github":"https://github.com/Mulander-J",
         "segment":"https://segmentfault.com/u/mulander",
@@ -24,7 +25,8 @@ export default {
     //  导航信息
     "nav":{
         showHelp:true, //  是否显示帮助链接
-        data:navData    //  导航数据
+        data:navData,    //  博客平台导航
+        adminRou:adminRoute[0].children    // 管理平台导航
     },
     //  首页信息
     "homeLabel":{
