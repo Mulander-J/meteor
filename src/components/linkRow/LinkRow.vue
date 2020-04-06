@@ -10,7 +10,7 @@
                <transition-group name="el-fade-in-linear" class="item-box">
                    <a class="item" target="_blank"
                       v-for="(item,inIndex) in row.group" :key="item.name+'_'+inIndex"
-                      :class="{'item-wall':item.outWall}"
+                      :class="{'item-wall':(1==item.outWall)}"
                       :href="item.link" :title="item.desc">
                        <div class="left">
                            <img src="/img/refs/default.png" alt="">

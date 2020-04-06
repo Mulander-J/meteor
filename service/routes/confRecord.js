@@ -3,9 +3,10 @@ var router = express.Router();
 
 //  引入状态码/错误码
 var codeDic = require('./../config/req_code');
-//  引入开发日志
-var log = require('./../../explain/log');
 
+//  文件读写
+const fs = require('fs');
+const path = require('path')
 
 /**
  * @swagger
@@ -20,19 +21,20 @@ var log = require('./../../explain/log');
  *         description: 【成功】
  */
 router.get('/log', async (req, res) => {
-    try {
-        let result = await log;
-        res.json({
-            ...codeDic.SUCCESS_GLOBAL,
-            result: result
-        });
-    }catch (err) {
-        res.json({
-            ...codeDic.ERROR_GLOBAL,
-            msg:err.message,
-            result:[]
-        });
-    }
+    fs.readFile(path.resolve(__dirname,'./../logs/log.json'),(err,logJson)=>{
+        if(err){
+            res.json({
+                ...codeDic.ERROR_GLOBAL,
+                msg:err.message,
+                result:null
+            });
+        }else {
+            res.json({
+                ...codeDic.SUCCESS_GLOBAL,
+                result:JSON.parse(logJson)||null
+            });
+        }
+    });
 });
 
 
