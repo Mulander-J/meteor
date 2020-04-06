@@ -25,7 +25,10 @@
             this.$api.record.log().then(res=>{
                 let {success,result} = res.data;
                 if(success){
-                    THAT.log = result;
+                    let _data = result.data;
+                    _data.sort(THAT.$util._sortByKey('sort'));
+                    _data.reverse();
+                    THAT.log = _data;
                 }else {
                     THAT.log = []
                 }

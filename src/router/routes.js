@@ -132,7 +132,7 @@ export const adminRoute = [
                 path: 'adTag',
                 name: 'AdTag',
                 meta:{title:'标签管理',icon:'el-icon-discount'},
-                component: () => import('../views/admin/model/AdBookmark.vue'),
+                component: () => import('../views/admin/model/AdTag.vue'),
             },
             {
                 path: 'adCats',

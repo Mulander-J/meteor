@@ -10,8 +10,8 @@ var confTag = require('./../models/confTag');
 const defaultPattern = {
     name:"",
     remark:"",
-    color:"#ecf5ff",
-    isTop:0
+    color:"#ECF5FF",
+    isTop:"0"
 };
 
 /**
@@ -26,7 +26,7 @@ const defaultPattern = {
  *       remark:
  *         type: string
  *       isTop:
- *         type: integer
+ *         type: string
  *       pageSize:
  *         type: integer
  *       pageNo:
@@ -54,8 +54,7 @@ const defaultPattern = {
  */
 router.post('/list', async (req, res) => {
     try {
-        let parameters = req.body;
-        let doc = await  confTag.find(parameters).sort('name');
+        let doc = await  confTag.find({}).sort({'isTop':-1,'_updated':-1,'name':-1});
         console.log(`# 请求|标签-列表|成功`);
         res.json({
             ...codeDic.SUCCESS_GLOBAL,
@@ -93,20 +92,24 @@ router.post('/list', async (req, res) => {
  *         description: 【成功】
  */
 router.post('/page', (req, res) => {
-    const {pageNum = 1, pageSize = 10, name = ''} = req.body;
-    confTag.countDocuments({ // 获取数据条数
-        $or: [
-            {name: {'$regex': name, '$options': '$i'}}
-        ]
-    }, (err, count) => { //查询出结果返回
-        confTag.find({
-            $or: [
-                {name: {'$regex': name, '$options': '$i'}}
-            ]
-        })
-            .skip((pageNum - 1) * pageSize)
+    const {pageNo = 1, pageSize = 10, confModel } = req.body;
+    let _condition = {};
+    //  多字段查询（^$精确查，''模糊查,i大小写）
+    [
+        {key:'name',regex:(v)=>eval(`/${v}/i`)},
+        {key:'isTop',regex:(v)=>eval(`/^${v}$/i`)}
+    ].forEach(filterItem=>{
+        if(confModel[filterItem.key]){
+            _condition[filterItem.key]=({'$regex':filterItem.regex(confModel[filterItem.key])})
+        }
+    });
+    // 获取数据条数
+    confTag.countDocuments(_condition, (err, count) => {
+        //查询出结果返回
+        confTag.find(_condition)
+            .skip((pageNo - 1) * pageSize)
             .limit(pageSize)
-            .sort({'name': -1})
+            .sort({'isTop':-1,'_updated':-1,'name':-1})
             .exec((err, doc) => {
                 if (!err && doc) {
                     console.log(`# 请求|标签-分页列表|成功`);
@@ -163,15 +166,18 @@ router.post('/save',
                     errors: errors.mapped()
                 }) ;
             }else {
-                let pattern = {
-                    ...defaultPattern,
-                    ...req.body
-                };
-                pattern.name = pattern.name.toLowerCase() ;
+                let pattern = {};
+                Object.keys(defaultPattern).forEach(key=>{
+                    pattern[key] = req.body[key]||defaultPattern[key]
+                });
+                //  判断颜色是否合法
+                let reg = new RegExp(/^#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$/,pattern.color);
+                if(!reg) pattern.color = defaultPattern.color;
                 let doc = null;
-                let mark =  await confTag.findOne({name:pattern.name});
-                if(pattern._id){    //  修改
-                    if(mark&&pattern._id!==mark._id.toString()){
+                //  重名校验
+                let mark =  await confTag.findOne({name:{'$regex':eval(`/^${pattern.name}$/i`)}});
+                if(req.body._id){    //  修改
+                    if(mark&&req.body._id!==mark._id.toString()){
                         console.log(`# 请求|标签-修改|重名-${pattern.name}`);
                         res.json({
                             ...codeDic.ERROR_UNIQUE,
@@ -179,7 +185,7 @@ router.post('/save',
                             result:mark
                         });
                     }else {
-                        doc = await confTag.updateOne(pattern);
+                        doc = await confTag.updateOne({_id:req.body._id},pattern);
                         console.log(`# 请求|标签-修改|成功-${pattern.name}`);
                         res.json({
                             ...codeDic.SUCCESS_SAVE,
