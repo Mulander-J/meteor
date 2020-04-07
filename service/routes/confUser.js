@@ -326,11 +326,19 @@ router.get('/login',
                 let {name='',password=''} = req.query;
                 password = encoder.codeEnc(password,secret);
                 let doc =  await confUser.find({ name: name,password:password });
-                console.log(`# 请求|用户-登录|成功`);
-                res.json({
-                    ...codeDic.SUCCESS_DELETE,
-                    result:doc
-                });
+                if(doc.length>0){
+                    console.log(`# 请求|用户-登录|成功`);
+                    res.json({
+                        ...codeDic.SUCCESS_LOGIN,
+                        result:doc
+                    });
+                }else {
+                    console.log(`# 请求|用户-登录|失败`);
+                    res.json({
+                        ...codeDic.ERROR_LOGIN,
+                        result:[]
+                    })
+                }
             }
         }catch (err) {
             console.log(`# 请求|用户-登录|失败`);

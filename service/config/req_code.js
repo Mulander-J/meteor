@@ -14,6 +14,11 @@ module.exports={
     "success":true,
     "msg":"删除成功",
   },
+  "SUCCESS_LOGIN":{
+    "code":"10003",
+    "success":true,
+    "msg":"登录成功",
+  },
   "ERROR_GLOBAL":{
     "code":"20000",
     "success":false,
@@ -38,5 +43,10 @@ module.exports={
     "code":"20004",
     "success":false,
     "msg":"参数缺失",
+  },
+  "ERROR_LOGIN":{
+    "code":"20005",
+    "success":false,
+    "msg":"登录失败",
   }
 };
