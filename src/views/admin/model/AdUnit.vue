@@ -28,10 +28,9 @@
                        layout="total, sizes, prev, pager, next, jumper"
                        :total="pageOps.total">
         </el-pagination>
-        <el-table stripe border
-                  :data="tableData" v-loading="tableLoading"
+        <el-table stripe :data="tableData" v-loading="tableLoading"
                   @selection-change="(s)=>{tableSelection=s}">
-            <el-table-column type="selection" width="55"></el-table-column>
+            <el-table-column fixed="left" type="selection" width="50"/>
             <el-table-column prop="name" label="名称" sortable width="200">
                 <p slot-scope="scope" class="curd-cell">
                     <span class="crud-edit" @click="_handleEdit(scope.row)"><i class="el-icon-edit"></i>{{scope.row.name}}</span>

@@ -39,8 +39,25 @@ const _groupByKey = (groupData,key)=>{
     res.sort(_sortByKey(key));
     return res;
 };
+const _toTreeData = (source,pattern) =>{
+    let {
+        id='id', parentId='parent',
+        children='children',firstParent='#',
+        isSort=false,sortKey='sort',
+    } = pattern;
+    let cloneData = JSON.parse(JSON.stringify(source));
+    let tree = cloneData.filter(father=>{
+        let branchArr = cloneData.filter(child => father[id] == child[parentId]);
+        if(isSort)branchArr.sort(_sortByKey(sortKey));
+        branchArr.length>0 ? father[children] = branchArr : '';
+        return father[parentId] == firstParent
+    });
+    if(isSort)tree.sort(_sortByKey(sortKey));
+    return tree
+};
 
 export default {
     _sortByKey,
-    _groupByKey
+    _groupByKey,
+    _toTreeData
 }

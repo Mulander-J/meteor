@@ -126,7 +126,7 @@ export const adminRoute = [
                 path: 'adBlog',
                 name: 'AdBlog',
                 meta:{title:'博客管理',icon:'el-icon-notebook-2'},
-                component: () => import('../views/admin/model/AdBookmark.vue'),
+                component: () => import('../views/admin/model/AdBlog.vue'),
             },
             {
                 path: 'adTag',
@@ -138,7 +138,7 @@ export const adminRoute = [
                 path: 'adCats',
                 name: 'AdCats',
                 meta:{title:'类目管理',icon:'el-icon-coin'},
-                component: () => import('../views/admin/model/AdBookmark.vue'),
+                component: () => import('../views/admin/model/AdCats.vue'),
             },
             {
                 path: 'adBookmark',
@@ -147,16 +147,16 @@ export const adminRoute = [
                 component: () => import('../views/admin/model/AdBookmark.vue'),
             },
             {
+                path: 'adUser',
+                name: 'AdUser',
+                meta:{title:'用户管理',icon:'el-icon-user'},
+                component: () => import('../views/admin/model/AdUser.vue'),
+            },
+            {
                 path: 'adRecord',
                 name: 'AdRecord',
                 meta:{title:'记录管理',icon:'el-icon-receiving'},
-                component: () => import('../views/admin/model/AdBookmark.vue'),
-            },
-            {
-                path: 'adToDo',
-                name: 'AdToDo',
-                meta:{title:'备忘摘要',icon:'el-icon-document'},
-                component: () => import('../views/admin/model/AdBookmark.vue'),
+                component: () => import('../views/admin/model/AdRecord.vue'),
             }
         ]
     }
