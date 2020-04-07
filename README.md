@@ -282,43 +282,78 @@ export const routes = [
 ## 3.开发计划_最后更新：`2020/03/22`
 > [开发日志](https://github.com/Mulander-J/meteor/blob/master/explain/log.md)  
 
+C1_一世纪元
+
+- 数据库构建
+- 后端部分逻辑开发
+- 前端管理平台开发
+
 C0_零纪元 `2020/03/17-2020/03/31`
 
 - 相关技术点回顾与深入
 - 博客设计
 - 前端部分场景
 ---
-未来纪元
+全量计划
 ```markdown
 排序不分先后
 - 前端
     - 页首 √
+        - 页首搜索功能
     - 页脚 √
     - 开始页 √
     - 首页 √
     - 博客页 √
+        - blog分享页开发
+        - blog查看窗口开发
+        - 评论功能
     - 书签页 √
-    - 引入 element-scroll 滚动条 √
-    - 回到顶部 √
-    - 背景粒子动画particles √
-    - 地理位置获取 √
-    - 当地日出日落时间获取 √
-    - 多端适配（@media）
-    - 浏览器兼容（主要适配safari）
-    - 天气获取
-    - 页首搜索功能
-    - bookmark页快速检索
-    - blog分享页开发
-    - blog查看窗口开发
-    - record页开发 
+        - bookmark页快速检索
     - 加载页
+    - 记录页
+        - log-开发日志 √
+        - record-media 开发
+        - record-ticket 开发
     - 个人信息页
-    - 管理平台
-    - 评论功能
-    - 密码强度检测
+    - 管理平台 √
+        - 页首 √
+            - 每日一诗 √
+        - 页脚 √
+            - 音乐播放器
+        - 博客管理
+        - 用户管理 √
+            - 密码强度检测
+            - 随机生成头像
+        - 标签管理 √
+        - 书签管理 √
+        - 类目管理 √
+    - 其他
+        - 多端适配（@media）
+        - 浏览器兼容（主要适配safari）
+        - 引入 element-scroll 滚动条 √
+        - 侧边进度条
+        - 回到顶部 √
+        - 背景粒子动画particles √
+        - 地理位置获取 √
+        - 当地日出日落时间获取 √
+        - 天气获取
     - ...
 - 后端
-    - all
+    - user-CRUD √
+    - cats-CRUD √
+    - tag-CRUD √
+    - blog-CRUD
+    - bookmark-CRUD √
+    - record/media-CRUD
+    - record/ticket-CRUD
+    - record/log √
+    - 成功/异常日志输出 √
 - 数据库
-    - all
+    - conf_user √
+    - conf_tag √
+    - conf_cats √
+    - conf_blog
+    - conf_bookmark √
+    - conf_ticket
+    - conf_media
 ```

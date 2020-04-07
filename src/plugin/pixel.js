@@ -452,93 +452,93 @@ export const _pixel = (eleId)=>{
         createRandomCell();
     }
 
-    // function handlePointer() {
-    //     let lastCell = [];
-    //     let touchRecords = {};
-    //
-    //     function isSameCell(i, j) {
-    //         const [li, lj] = lastCell;
-    //
-    //         lastCell = [i, j];
-    //
-    //         return i === li && j === lj;
-    //     }
-    //
-    //     function print(isMove, { clientX, clientY }) {
-    //         const i = Math.floor(clientY / CELL_DISTANCE);
-    //         const j = Math.floor(clientX / CELL_DISTANCE);
-    //
-    //         if (isMove && isSameCell(i, j)) {
-    //             return;
-    //         }
-    //
-    //         const cell = new Cell(i, j, {
-    //             background: CELL_HIGHLIGHT,
-    //             forceElectrons: true,
-    //             electronCount: isMove ? 2 : 4,
-    //             electronOptions: {
-    //                 speed: 3,
-    //                 lifeTime: isMove ? 500 : 1000,
-    //                 color: CELL_HIGHLIGHT } });
-    //
-    //
-    //
-    //         cell.paintNextTo(mainLayer);
-    //     }
-    //
-    //     const handlers = {
-    //         touchend({ changedTouches }) {
-    //             if (changedTouches) {
-    //                 Array.from(changedTouches).forEach(({ identifier }) => {
-    //                     delete touchRecords[identifier];
-    //                 });
-    //             } else {
-    //                 touchRecords = {};
-    //             }
-    //         } };
-    //
-    //
-    //     function filterTouches(touchList) {
-    //         return Array.from(touchList).filter(({ identifier, clientX, clientY }) => {
-    //             const rec = touchRecords[identifier];
-    //             touchRecords[identifier] = { clientX, clientY };
-    //
-    //             return !rec || clientX !== rec.clientX || clientY !== rec.clientY;
-    //         });
-    //     }
-    //
-    //     [
-    //         'mousedown',
-    //         'touchstart',
-    //         'mousemove',
-    //         'touchmove'].
-    //     forEach(name => {
-    //         const isMove = /move/.test(name);
-    //         const isTouch = /touch/.test(name);
-    //
-    //         const fn = print.bind(null, isMove);
-    //
-    //         handlers[name] = function handler(evt) {
-    //             if (isTouch) {
-    //                 filterTouches(evt.touches).forEach(fn);
-    //             } else {
-    //                 fn(evt);
-    //             }
-    //         };
-    //     });
-    //
-    //     const events = Object.keys(handlers);
-    //
-    //     events.forEach(name => {
-    //         document.addEventListener(name, handlers[name]);
-    //     });
-    //
-    //     return function unbind() {
-    //         events.forEach(name => {
-    //             document.removeEventListener(name, handlers[name]);
-    //         });
-    //     };
-    // }
+    function handlePointer() {
+        let lastCell = [];
+        let touchRecords = {};
+
+        function isSameCell(i, j) {
+            const [li, lj] = lastCell;
+
+            lastCell = [i, j];
+
+            return i === li && j === lj;
+        }
+
+        function print(isMove, { clientX, clientY }) {
+            const i = Math.floor(clientY / CELL_DISTANCE);
+            const j = Math.floor(clientX / CELL_DISTANCE);
+
+            if (isMove && isSameCell(i, j)) {
+                return;
+            }
+
+            const cell = new Cell(i, j, {
+                background: CELL_HIGHLIGHT,
+                forceElectrons: true,
+                electronCount: isMove ? 2 : 4,
+                electronOptions: {
+                    speed: 3,
+                    lifeTime: isMove ? 500 : 1000,
+                    color: CELL_HIGHLIGHT } });
+
+
+
+            cell.paintNextTo(mainLayer);
+        }
+
+        const handlers = {
+            touchend({ changedTouches }) {
+                if (changedTouches) {
+                    Array.from(changedTouches).forEach(({ identifier }) => {
+                        delete touchRecords[identifier];
+                    });
+                } else {
+                    touchRecords = {};
+                }
+            } };
+
+
+        function filterTouches(touchList) {
+            return Array.from(touchList).filter(({ identifier, clientX, clientY }) => {
+                const rec = touchRecords[identifier];
+                touchRecords[identifier] = { clientX, clientY };
+
+                return !rec || clientX !== rec.clientX || clientY !== rec.clientY;
+            });
+        }
+
+        [
+            'mousedown',
+            'touchstart',
+            'mousemove',
+            'touchmove'].
+        forEach(name => {
+            const isMove = /move/.test(name);
+            const isTouch = /touch/.test(name);
+
+            const fn = print.bind(null, isMove);
+
+            handlers[name] = function handler(evt) {
+                if (isTouch) {
+                    filterTouches(evt.touches).forEach(fn);
+                } else {
+                    fn(evt);
+                }
+            };
+        });
+
+        const events = Object.keys(handlers);
+
+        events.forEach(name => {
+            document.addEventListener(name, handlers[name]);
+        });
+
+        return function unbind() {
+            events.forEach(name => {
+                document.removeEventListener(name, handlers[name]);
+            });
+        };
+    }
 
     function prepaint() {
         drawGrid();
@@ -616,7 +616,7 @@ export const _pixel = (eleId)=>{
             prepaint();
             render();
 
-            // this.unbindEvents = handlePointer();
+            this.unbindEvents = handlePointer();
             this.isAlive = true;
         },
 

@@ -1,6 +1,6 @@
 <template>
     <div>
-        RecTicket
+        RecTicket-开发中
     </div>
 </template>
 
