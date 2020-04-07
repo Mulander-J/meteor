@@ -84,9 +84,9 @@
     mounted(){
       this._drawCanvas()
     },
-    // beforeDestoryed(){
-    //   this.pixelObj.destroy()
-    // },
+    beforeDestroy(){
+      this.pixelObj.destroy()
+    },
     methods: {
       _drawCanvas(){
         let pixShape = _pixel('#homePixel');

@@ -1,6 +1,6 @@
 <template>
     <div>
-        RecMedia
+        RecMedia-开发中
     </div>
 </template>
 
