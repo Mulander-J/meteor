@@ -80,9 +80,15 @@
              * @description  开始对话框点击确认
              */
             handleStart(){
-                this.isShow = false;
+                this.$api.user.login({
+                    name:'Mulander',
+                    password:'m199676'
+                }).then(res=>{
+                    console.log(res);
+                })
+                // this.isShow = false;
                 // localStorage.setItem('meteor_user',JSON.stringify({userId:1}));
-                this._goToHome();
+                // this._goToHome();
             },
             /**
              * @description 执行路由跳转|start-home

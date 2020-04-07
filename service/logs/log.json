@@ -8,6 +8,12 @@
       "duration":"2020/04/01-",
       "logs":[
         {
+          "day":"day6",
+          "daily":[
+            "cats-类目前后端对接"
+          ]
+        },
+        {
           "day":"day5",
           "daily":[
             "tag-标签前后端对接",

@@ -12,7 +12,7 @@
                 <ElTree class="meteor-margin-top1" ref="tree"
                         style="background: transparent;"
                         accordion default-expand-all
-                        :expand-on-click-node="false" node-key="id"
+                        :expand-on-click-node="false" node-key="_id"
                         :props="tree_props" :data="list_menu"
                         :filter-node-method="_filterNode"
                         @node-click="_tree_click">
@@ -23,8 +23,8 @@
         <!--    博客流     -->
         <div class="blog-col-timeLine">
             <!--    博客流计数   -->
-            <h2 class="meteor-text-upper">{{curMenu||allMenuName}} | Total:{{list_blog.length}}</h2>
-            <blockquote>{{curMenu||allMenuName}}</blockquote>
+            <h2 class="meteor-text-upper">{{curMenu.name||''}} | Total:{{list_blog.length}}</h2>
+            <blockquote>{{curMenu.desc||''}}</blockquote>
             <div style="padding: 2rem">
                 <transition name="el-fade-in-linear">
                     <BlogLine v-if="list_blog.length>0" :data="list_blog"
@@ -48,7 +48,7 @@
 <script>
     import BlogLine from '@/components/blogLine/BlogLine.vue'
 
-    const allMenuName = 'all'
+    const allMenuName = 'all';
 
     export default {
         name: "Blog",
@@ -57,47 +57,15 @@
             return {
                 allMenuName,
                 tree_props:{
+                    'id':'_id',
                     'label':'name',
                     'children':'children'
                 },
-                list_menu:[
-                    {
-                        id:'####',
-                        name:'all',
-                        children:[
-                            {
-                                id:'1',
-                                name:'article',
-                                children:[
-                                    {  id:'2',name:'console'},
-                                    {  id:'3',name:'digest'},
-                                    {  id:'7',name:'leetcode'},
-                                ]
-                            },
-                            {
-                                id:'4',
-                                name:'thought',
-                                children:[
-                                    {  id:'5',name:'daily'},
-                                    {  id:'6',name:'summary'},
-                                ]
-                            },
-                            {
-                                id:'8',
-                                name:'Named'
-                            },
-                            {
-                                id:'10',
-                                name:'Travel'
-                            },
-                            {
-                                id:'9',
-                                name:'unclassified'
-                            }
-                        ]
-                    }
-                ],
-                curMenu:'',
+                list_menu:[],
+                curMenu:{
+                    name:'',
+                    desc:''
+                },
                 filterText:'',
                 showBlog:false,
                 json_blog:[
@@ -305,8 +273,8 @@
             list_blog(){
                 let res = [];
                 if(this.json_blog.length>0){
-                    if(this.curMenu&&(allMenuName!==this.curMenu)){
-                        res = this.json_blog.filter(ele=>ele.category.indexOf(this.curMenu)>-1)
+                    if(this.curMenu.name){
+                        res = this.json_blog.filter(ele=>ele.category.indexOf(this.curMenu.name)>-1)
                     }else {
                         res = this.json_blog.map(e=>e)
                     }
@@ -315,7 +283,13 @@
             }
         },
         created(){
-          this.curMenu = '' ;
+          this.curMenu = {
+              name:'',
+              desc:''
+          } ;
+        },
+        mounted(){
+            this._getTreeData()
         },
         methods:{
             /*  打开博客  */
@@ -338,9 +312,31 @@
                 console.log('_handleShare',item);
                 alert(`${this.$conf.appBaseUrl}/share?id=${item.id}`)
             },
-            _tree_click(data,node,vNode){
-                console.log(data, node, vNode);
-                this.curMenu = data.name
+            /*  获取类目树 */
+            _getTreeData () {
+                let THAT = this;
+                this.$api.cats.list({}).then(res=>{
+                    let {success,result} = res.data;
+                    if(success){
+                        THAT.list_menu = THAT.$util._toTreeData(result,{
+                            id:'_id',
+                            parentId:'parentId',
+                            firstParent:'######',
+                            isSort:true,
+                            sort:'sort'
+                        });
+                    }else {
+                        THAT.list_menu = [];
+                        THAT.$message.error(res.data.msg);
+                    }
+                }).catch(err=>{
+                    THAT.list_menu = [];
+                    THAT.$message.error(err.message);
+                })
+            },
+            /*  类目树点击   */
+            _tree_click(data){
+                this.curMenu = data
             },
             /**
              * @description 菜单目录检索

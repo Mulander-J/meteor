@@ -17,7 +17,7 @@
         </template>
         <template slot="unitTable">
             <el-table-column prop="color" label="颜色"></el-table-column>
-            <el-table-column prop="isTop" label="是否置顶">
+            <el-table-column prop="isTop" label="是否置顶" width="100" align="center">
                 <template slot-scope="scope">
                     <i v-if="1==scope.row.isTop" class="el-icon-check" style="color:#13ce66;"></i>
                     <i v-else class="el-icon-close" style="color:#ff4949;"></i>
