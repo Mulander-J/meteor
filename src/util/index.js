@@ -59,5 +59,19 @@ const _toTreeData = (source,pattern) =>{
 export default {
     _sortByKey,
     _groupByKey,
-    _toTreeData
+    _toTreeData,
+    _checkSession:(key,inKeys)=>{
+        let _session = sessionStorage.getItem(key);
+        try {
+            let Obj = JSON.parse(_session);
+            let count = 0;
+            inKeys.forEach(ele=>{
+                if(Obj[ele])count++
+            });
+            return count===inKeys.length
+        }catch (err) {
+            console.log(err);
+            return false
+        }
+    }
 }

@@ -29,9 +29,7 @@
             </el-row>
             <el-row>
                 <el-form-item label="密码">
-                    <el-input :type="passwordType?'password':'text'" v-model="props.formData.password" placeholder="密码">
-                        <i slot="suffix" @click="passwordType=!passwordType" class="el-input__icon el-icon-view"></i>
-                    </el-input>
+                    <el-input type="password" show-password v-model="props.formData.password" placeholder="密码"/>
                 </el-form-item>
             </el-row>
             <el-row>
@@ -65,8 +63,7 @@
                 },
                 defaultQuery: {
                     name: ''
-                },
-                passwordType:true
+                }
             }
         }
     }
