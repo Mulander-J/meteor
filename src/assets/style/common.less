@@ -23,12 +23,105 @@
 .meteor-text-upper{
   text-transform: uppercase;
 }
+/*  按钮悬浮 */
+.meteor-btn-hover{
+  --hoverColor:#fff;
+  position: relative;
+  display: block;
+  margin: 30px auto 0;
+  padding: 14px 15px;
+  font-size: 14px;
+  border-radius: 0;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  letter-spacing: .08em;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
+  transition: all 1s ease;
+  border: 2px solid;
+  &:after{
+    content: "";
+    position: absolute;
+    height: 0;
+    left: 50%;
+    top: 50%;
+    width: 150%;
+    transition: all 0.75s ease 0s;
+    background: var(--hoverColor);
+    opacity:.2;
+    transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+  }
+  &:hover{
+    &:after{
+      height: 450%;
+    }
+  }
+}
+.btn-hover-victor-1{
+  &:after{
+    transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+  }
+  &:hover{
+    &:after{
+      height: 450%;
+    }
+  }
+}
+.btn-hover-victor-2{
+  &:after{
+    transform: translateX(-50%) translateY(-50%) rotate(25deg);
+  }
+  &:hover{
+    &:after{
+      height: 450%;
+    }
+  }
+}
+.btn-hover-victor-3{
+  &:after{
+    transform: translateX(-50%) translateY(-50%);
+  }
+  &:hover{
+    &:after{
+      height: 140%;
+    }
+  }
+}
+.btn-hover-victor-4{
+  &:after{
+    transform: translateY(-50%) translateX(-50%) rotate(90deg);
+  }
+  &:hover{
+    &:after{
+      height: 600% !important;
+    }
+  }
+}
+
 .meteor-txtGradient{
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
   -webkit-background-size: 200% 100%;
   background-image: -webkit-linear-gradient(left,#eee,#333 25%,#eee 50%,#333 75%,#eee);
   animation: txtGradient 4s infinite linear;
+}
+.meteor-nyanCat{
+  position: relative;
+  &:after{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("/img/refs/nyan-cat.gif");
+    background-repeat: no-repeat;
+    background-size: contain;
+    animation: logoAnimate 4s ease-in-out infinite;
+    z-index: -1;
+  }
 }
 
 /*  动画  */
@@ -49,5 +142,18 @@
   }
   100% {
     background-position: -100% 0;
+  }
+}
+@keyframes logoAnimate {
+  0%,100%{
+    opacity: 0;
+    transform: translateX(-20%);
+  }
+  10%,70%{
+    transform: translateX(120%);
+    opacity: 1;
+  }
+  80%{
+    opacity: 0;
   }
 }

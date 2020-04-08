@@ -33,8 +33,10 @@
             <el-table-column fixed="left" type="selection" width="50"/>
             <el-table-column prop="name" label="名称" sortable width="200">
                 <p slot-scope="scope" class="curd-cell">
-                    <span class="crud-edit" @click="_handleEdit(scope.row)"><i class="el-icon-edit"></i>{{scope.row.name}}</span>
-                    <span class="crud-delete" @click="_handleDelete(scope.row._id)"><i
+                    <span v-if="actionList.indexOf('edit')>-1" class="crud-edit" @click="_handleEdit(scope.row)" title="模型编辑"><i class="el-icon-edit"></i>{{scope.row.name}}</span>
+                    <span v-if="actionList.indexOf('mdEdit')>-1" class="crud-mdEdit" @click="_handleMdEdit(scope.row)" title="文章编辑"><i
+                            class="el-icon-edit-outline"></i></span>
+                    <span v-if="actionList.indexOf('delete')>-1" class="crud-delete" @click="_handleDelete(scope.row._id)" title="删除"><i
                             class="el-icon-delete"></i></span>
                 </p>
             </el-table-column>
@@ -42,13 +44,25 @@
             <el-table-column prop="_updated" label="最后更新" sortable show-tooltip-when-overflow/>
             <el-table-column prop="_created" label="创建时间" sortable show-tooltip-when-overflow/>
         </el-table>
-        <el-dialog title="Model" :visible.sync="editShow" width="max-content">
-            <el-form inline :model="formData" size="small">
-              <slot name="modelForm" :formData="formData"></slot>
-            </el-form>
-            <div style="text-align: right">
-                <el-button type="success" @click="_handleSubmit">Submit</el-button>
-            </div>
+        <el-dialog :title="dialogName" :visible.sync="editShow" :fullscreen="fullscreen"
+                   width="max-content" @closed="_handleClose">
+            <transition name="el-fade-in">
+                <template v-if="editShow&&(dialogName==='Model')">
+                    <el-form inline :model="formData" size="small">
+                        <slot name="modelForm" :formData="formData"></slot>
+                        <div style="text-align: right">
+                            <el-button type="success" @click="_handleSubmit">Submit</el-button>
+                        </div>
+                    </el-form>
+                </template>
+                <template v-else-if="editShow&&(dialogName==='MarkDown')">
+                    <section class="meteor-adBlog-markDown meteor-blog-wrapper">
+                        <mavon-editor v-model="blogRow.value"
+                                      @save="_handleMdSubmit"
+                                      @helpToggle="_handleNoMeaning('虽点帮助，然并卵')"/>
+                    </section>
+                </template>
+            </transition>
         </el-dialog>
     </section>
 </template>
@@ -59,8 +73,13 @@
         props:{
             title:{type:String, default:''},
             apiName:{type:String, default:''},
+            actionList:{type:String, default:'edit,delete'},
             defaultData:{type:Object, default:null},
-            defaultQuery:{type:Object, default:null}
+            defaultQuery:{type:Object, default:null},
+            pageDataTran:{
+                type:Function,
+                default:(v)=>{return v}
+            }
         },
         data(){
             return {
@@ -68,13 +87,19 @@
                 tableSelection:[],
                 tableLoading:false,
                 editShow:false,
+                fullscreen:false,
+                dialogName:'Model',
                 pageOps:{
                     total:1,
                     pageSize:10,
                     pageNo:1
                 },
                 formData:null,
-                queryData:null
+                queryData:null,
+                blogRow:{
+                    _id:'',
+                    value:''
+                }
             }
         },
         created(){
@@ -95,7 +120,7 @@
                 }).then(res=>{
                     let {success,result,total} = res.data;
                     if(success){
-                        THAT.tableData = result;
+                        THAT.tableData = THAT.pageDataTran(result);
                         THAT.pageOps.total = total;
                     }else {
                         THAT.tableData = [];
@@ -137,7 +162,18 @@
                     ...this.defaultData,
                     ...row
                 };
+                this.dialogName = 'Model';
+                this.fullscreen = false;
                 this.editShow = true;
+            },
+            _handleClose(){
+                this.formData ={
+                    ...this.defaultData
+                };
+                this.blogRow = {
+                    _id:'',
+                    value:''
+                };
             },
             _handleSubmit(){
                 let THAT = this;
@@ -149,6 +185,45 @@
                         THAT.$message.error(res.data.msg);
                     }
                 });
+            },
+
+            _handleMdEdit(row){
+                let THAT = this;
+                this.$api.blog.read(row._id).then(res=>{
+                    let {success,result} = res.data;
+                    if(success){
+                        THAT.blogRow._id = result[0]._id;
+                        THAT.blogRow.value = result[0].content.md;
+                        THAT.dialogName = 'MarkDown';
+                        THAT.fullscreen = true;
+                        THAT.editShow = true;
+                    }else {
+                        THAT.$message.error(res.data.msg)
+                    }
+                }).catch(err=>{
+                    THAT.$message.error(err.message)
+                });
+            },
+            _handleMdSubmit(string,render){
+                let THAT = this;
+                this.$api.blog.write({
+                    _id:this.blogRow._id,
+                    content:{
+                        md:string,
+                        html:render
+                    }
+                }).then(res=>{
+                    if(res.data.success){
+                        THAT.$message.success('保存成功')
+                    }else {
+                        THAT.$message.error(res.data.msg)
+                    }
+                }).catch(err=>{
+                    THAT.$message.error(err.message)
+                })
+            },
+            _handleNoMeaning(str){
+                this.$message.info(str)
             },
 
             _handleDelete(id){
@@ -194,10 +269,14 @@
         padding: 0 1.2rem 2rem 0;
         .curd-cell{
             .crud-delete,
+            .crud-mdEdit,
             .crud-edit{
                 transition: .2s ease-in-out;
                 will-change: color;
                 cursor: pointer;
+            }
+            .crud-mdEdit{
+                margin-left: 1rem;
             }
             .crud-delete{
                 opacity: .2;
@@ -208,11 +287,16 @@
                     color: #ff4949;
                     opacity: 1;
                 }
+                .crud-mdEdit{
+                    color: #67C23A;
+                    text-decoration: underline;
+                }
                 .crud-edit{
                     color: #409EFF;
                     text-decoration: underline;
                 }
             }
         }
+        .meteor-adBlog-markDown{}
     }
 </style>

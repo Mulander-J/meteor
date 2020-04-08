@@ -12,7 +12,7 @@ const defaultPattern = {
     parentId:'',
     desc:"",
     sort:0,
-    editable:1,
+    editable:0,
     remark:""
 };
 
@@ -190,6 +190,7 @@ router.post('/save',
 router.get('/delete',
     [validator.check('ids').exists({checkFalsy:true,checkNull:true}).withMessage('不能为空')],
     async (req, res) => {
+        // const un_name = 'UnClassified';
         try {
             let errors = validator.validationResult(req);
             if(!errors.isEmpty()) {

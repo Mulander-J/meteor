@@ -22,7 +22,7 @@
             <p class="adCast-treeNode" slot-scope="{ node, data }">
                 <span class="adCats-treeNode-name">{{`No_${data.sort}.${node.label}`}}</span>
                 <span>
-                    <el-button v-if="data.name!=='UNCLASSIFIED'" icon="el-icon-plus" type="text" size="mini"
+                    <el-button v-if="data.editable||data.parentId==='######'" icon="el-icon-plus" type="text" size="mini"
                             @click="_handleModel(node,data,false)">新增</el-button>
                     <el-button v-if="data.editable" icon="el-icon-edit" type="text" size="mini"
                             @click="_handleModel(node,data,true)">修改</el-button>

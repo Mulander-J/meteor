@@ -8,10 +8,19 @@
       "duration":"2020/04/01-",
       "logs":[
         {
+          "day":"day7",
+          "daily":[
+            "blog-crud",
+            "blog-mavonEditor引入",
+            "登录&注册页"
+          ]
+        },
+        {
           "day":"day6",
           "daily":[
             "cats-类目前后端对接",
-            "users-用户前后端对接"
+            "users-用户前后端对接",
+            "前端路由守卫加入session_user校验"
           ]
         },
         {

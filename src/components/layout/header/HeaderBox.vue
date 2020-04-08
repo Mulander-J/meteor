@@ -1,7 +1,8 @@
 <template>
-    <div class="meteor-header-wrapper">
+    <div class="meteor-header-wrapper meteor-flex-between">
         <!--    左侧logo  -->
-        <a class="meteor-header-startLink meteor-txtGradient" :href="$conf.adminHome">{{$conf.name}}</a>
+        <a class="meteor-header-startLink meteor-nyanCat"
+           title="前往meteor管理后台" @click="_goRouter({name:'Admin'})">{{$conf.name}}</a>
         <div class="meteor-header-right">
             <!--    整站搜索    -->
             <el-input class="search-box"  size="small" prefix-icon="el-icon-search" placeholder=""></el-input>

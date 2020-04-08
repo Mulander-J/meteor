@@ -7,12 +7,16 @@ import store from './store'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI)
+//  markdown编辑器，样式需单独引入
+import mavonEditor from 'mavon-editor'
+Vue.use(mavonEditor)
 //  初始化浏览器样式
-import "./assets/style/reset.css"
+import "./assets/style/reset.less"
 //  全局基本样式
 import "./assets/style/common.less"
 // 布局组件相关样式
 import "./assets/style/layout.less"
+import "mavon-editor/dist/css/index.css";
 //  跨域请求
 import VueJsonp from 'vue-jsonp'
 Vue.use(VueJsonp)

@@ -1,14 +1,15 @@
 <template>
     <el-container class="meteor-admin-wrapper">
         <el-header class="admin-header meteor-flex-between">
-            <a class="admin-header-link" :data-text="$conf.name" :href="$conf.appHome">{{$conf.name}}</a>
+            <span class="admin-header-link meteor-nyanCat"
+               title="前往meteor博客前台"
+               @click="$router.push({name:'Home'})">{{$conf.name}}</span>
             <span class="meteor-txtGradient admin-header-poet">{{poet}}</span>
-            <el-dropdown  class="meteor-flex-center">
+            <el-dropdown  class="meteor-flex-center" @command="_handleCommand">
                 <el-avatar :src="$conf.headImg"></el-avatar>
                 <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item>个人中心</el-dropdown-item>
-                    <el-dropdown-item>设置</el-dropdown-item>
-                    <el-dropdown-item>注销</el-dropdown-item>
+                    <el-dropdown-item command="SETTING">设置</el-dropdown-item>
+                    <el-dropdown-item command="LOGOUT">注销</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
         </el-header>
@@ -49,10 +50,10 @@
             }
         },
         mounted(){
-          this._getJinrishici()
+          this._getJinRiShiCi()
         },
         methods:{
-            _getJinrishici(){
+            _getJinRiShiCi(){
                 let THAT = this;
                 jinrishici.load(result => {
                     THAT.poet = result.data.content+'-'+result.data.origin.author;
@@ -60,6 +61,16 @@
                     console.log(err);
                     THAT.poet ='' ;
                 })
+            },
+            _handleCommand(command){
+                switch (command) {
+                    case 'LOGOUT':
+                        this.$store.commit('user/user_logout');
+                        this.$router.push({name:'Start'});
+                        break;
+                    default:
+                        console.log(command);
+                }
             }
         }
     }

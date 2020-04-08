@@ -91,7 +91,7 @@ router.post('/list', async (req, res) => {
  *       200:
  *         description: 【成功】
  */
-router.post('/page', (req, res) => {
+router.post('/page',(req, res) => {
     const {pageNo = 1, pageSize = 10, confModel } = req.body;
     let _condition = {};
     //  多字段查询（^$精确查，''模糊查,i大小写）

@@ -22,10 +22,7 @@
         </div>
         <!--    初始化对话框  -->
         <el-dialog  title="Start" :visible.sync="isShow">
-            <div>
-                博客管理平台-登录
-                <el-button @click="handleStart">登录</el-button>
-            </div>
+            <LoginForm @on-login="handleLogin" @on-signUp="handleSignUp"/>
         </el-dialog>
     </section>
 </template>
@@ -33,9 +30,11 @@
 <script>
     import {mapGetters} from 'vuex'
     import {skyCircle} from '@/plugin/canvas'
+    import LoginForm from './LoginForm'
 
     export default {
         name: "Start",
+        components:{LoginForm},
         data(){
             return{
                 isShow:false
@@ -43,8 +42,7 @@
         },
         computed:{
             ...mapGetters({
-                day_night:'global/day_night',
-                userInfo:'user/userInfo'
+                day_night:'global/day_night'
             })
         },
         watch:{
@@ -56,9 +54,7 @@
             this.initDayNight()
         },
         methods:{
-            /**
-             * @description 根据昼夜初始化背景
-             */
+            /*  根据昼夜初始化背景 */
             initDayNight(){
                 if(!this.day_night){    //  黑夜
                     this.$nextTick(()=>{
@@ -66,36 +62,54 @@
                     })
                 }
             },
-            /**
-             * @description 点击start链接
-             */
+            /*  点击start链接 */
             handleLink(){
-                if(this.userInfo){
-                    this._goToHome();
+                if(this.$util._checkSession('meteor_user',['_id','name'])){
+                    this._goToAdmin();
                 }else {
                     this.isShow = true;
                 }
             },
-            /**
-             * @description  开始对话框点击确认
-             */
-            handleStart(){
-                // this.$api.user.login({
-                //     name:'mulander',
-                //     password:'m199676'
-                // }).then(res=>{
-                //     console.log(res);
-                // })
-                this.isShow = false;
-                localStorage.setItem('meteor_user',JSON.stringify({userId:1}));
-                this._goToHome();
+            /*  登录  */
+            handleLogin(param){
+                delete param.mail;
+                let THAT = this;
+                this.$api.user.login(param).then(res=>{
+                    if(res.data.success){
+                        sessionStorage.setItem('meteor_user',JSON.stringify({
+                            _id:res.data.result[0]._id,
+                            name:res.data.result[0].name
+                        }));
+                        THAT.isShow = false;
+                        THAT._goToAdmin()
+                    }else {
+                        THAT.$message.error(res.data.msg)
+                    }
+                }).catch(err=>{
+                    THAT.$message.error(err.message)
+                })
             },
-            /**
-             * @description 执行路由跳转|start-home
-             * @private
-             */
-            _goToHome(){
-                this.$router.push({name:'Home'})
+            /*  注册  */
+            handleSignUp(param){
+                let THAT = this;
+                this.$api.user.save(param).then(res=>{
+                    if(res.data.success){
+                        sessionStorage.setItem('meteor_user',JSON.stringify({
+                            _id:res.data.result[0]._id,
+                            name:res.data.result[0].name
+                        }));
+                        THAT.isShow = false;
+                        THAT._goToAdmin()
+                    }else {
+                        THAT.$message.error(res.data.msg)
+                    }
+                }).catch(err=>{
+                    THAT.$message.error(err.message)
+                })
+            },
+            /*  执行路由跳转   */
+            _goToAdmin(){
+                this.$router.push({name:'Admin'})
             }
         }
     }

@@ -4,3 +4,4 @@
 export const GLOBAL_INIT= '_initGlobal'
 export const ACTION_GLOBAL_INIT= 'action_initGlobal'
 export const GLOBAL_GET_CURRENT= '_getCurrentTime'
+export const USER_LOGOUT= 'user_logout'
