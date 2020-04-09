@@ -171,7 +171,7 @@ router.post('/save',
                     pattern[key] = req.body[key]||defaultPattern[key]
                 });
                 //  判断颜色是否合法
-                let reg = new RegExp(/^#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$/,pattern.color);
+                let reg = /^#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$/.test(pattern.color);
                 if(!reg) pattern.color = defaultPattern.color;
                 let doc = null;
                 //  重名校验

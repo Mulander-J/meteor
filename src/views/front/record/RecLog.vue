@@ -9,7 +9,7 @@
                 <el-timeline class="recLog-timeLine">
                     <el-timeline-item v-for="(item,no) in ver.logs" :key="'log_'+no"
                                       placement="top" :timestamp="item.day" type="success">
-                        <p v-for="(day_do,dayNo) in item.daily" :key="dayNo">{{(dayNo+1)+'.'+day_do}}</p>
+                        <p class="recLog-item" v-for="(day_do,dayNo) in item.daily" :key="dayNo">{{(dayNo+1)+'.'+day_do}}</p>
                     </el-timeline-item>
                 </el-timeline>
             </div>
@@ -58,6 +58,10 @@
                     padding: 1rem;
                     border-radius: 8px;
                     background: linear-gradient(to right, #fff ,transparent, #73c5a2);
+                    .recLog-item{
+                        line-height: 2em;
+                        font-weight: 400;
+                    }
                 }
             }
         }

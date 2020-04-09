@@ -4,15 +4,19 @@
   "data": [
     {
       "sort": "1",
-      "version":"v0.0.1",
+      "version":"v1.0.8",
       "duration":"2020/04/01-",
       "logs":[
         {
           "day":"day8",
           "daily":[
-            "blog-view",
             "bug修复：页面跳转时遗留定时器未清除",
-            "markDown样式与reset全局样式覆盖问题"
+            "markDown样式与reset全局样式覆盖问题",
+            "blogLine-滚动加载（虚拟翻页）",
+            "window.onresize全局监听与动态高度",
+            "blogView开发",
+            "blog调用浏览接口时++visitNo（浏览计数）",
+            "blog文章修改后同步执行本地备份"
           ]
         },
         {

@@ -28,7 +28,9 @@ export default {
             UTC_num:8,
         },
         //  天气-未开发
-        weather:null
+        weather:null,
+        //  窗口缩放
+        resizeIndex:0
     },
     getters:{
         localDate : (state) => state.localDate,
@@ -55,6 +57,11 @@ export default {
         },
     },
     mutations: {
+        //  全局窗口缩放触发
+        [type.GLOBAL_RESIZE](state){
+            // console.log(payload);
+            state.resizeIndex+=1;
+        },
         //  初始化
         [type.GLOBAL_INIT](state,{param:{content,status},callBack}){
             //  初始化当前时间

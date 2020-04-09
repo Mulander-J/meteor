@@ -211,7 +211,7 @@
                     content:string
                 }).then(res=>{
                     if(res.data.success){
-                        THAT.$message.success('保存成功')
+                        THAT.$message.success(res.data.msg)
                     }else {
                         THAT.$message.error(res.data.msg)
                     }

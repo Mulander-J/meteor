@@ -130,7 +130,6 @@
                     tags:[],
                     cats:{_id:"",name:""},
                     content:"",
-                    html:"",
                     writer:"Mulander",
                     author:"",
                     reLink:"",
