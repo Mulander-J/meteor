@@ -6,15 +6,13 @@ var validator = require('express-validator');
 var codeDic = require('./../config/req_code');
 //引入实体类
 var confBlog = require('./../models/confBlog');
-
+//  默认参数
 const defaultPattern = {
     name:"",
+    fileName:"",
     tags:[],
     cats:"",
-    content:{
-        html:"",
-        md:""
-    },
+    content:"",
     writer:"Mulander",
     author:"Mr.UnKnown",
     reLink:"",
@@ -24,6 +22,10 @@ const defaultPattern = {
     thumb:[],
     remark:""
 };
+//  文件读写
+var fs = require('fs');
+var path = require('path');
+const backUpPath = path.join(__dirname,'./../../doc');
 
 /**
  * @swagger
@@ -94,10 +96,12 @@ router.get('/read', [validator.check('_id').exists({checkFalsy:true,checkNull:tr
             }else {
                 let doc = await  confBlog.find({_id:req.query._id})
                     .populate('cats thumb','name _id');
-                if(!!req.counter){
-                    console.log(req.counter);
-                }
                 console.log(`# 请求|博客-读取|成功`);
+                if(!!req.query.counter){
+                    let doc_sub = await confBlog.updateOne({_id:req.query._id},{visitNo:++doc[0].visitNo});
+                    console.log(doc_sub);
+                    console.log(`# 请求|博客-阅读|成功`);
+                }
                 res.json({
                     ...codeDic.SUCCESS_GLOBAL,
                     result: doc
@@ -133,22 +137,42 @@ router.get('/read', [validator.check('_id').exists({checkFalsy:true,checkNull:tr
  *       200:
  *         description: 【成功】
  */
-router.post('/write', async (req, res) => {
-    try {
-        let doc = await  confBlog.updateOne({_id:req.body._id},{content:req.body.content});
-        console.log(`# 请求|博客-写入|成功`);
-        res.json({
-            ...codeDic.SUCCESS_GLOBAL,
-            result: doc
-        });
-    }catch (err) {
-        console.log(`# 请求|博客-写入|失败`);
-        res.json({
-            ...codeDic.ERROR_GLOBAL,
-            msg:err.message,
-            result:[]
-        });
-    }
+router.post('/write',  (req, res) => {
+    confBlog.findOneAndUpdate(
+        {_id:req.body._id},
+        {content:req.body.content},
+        {new:true,useFindAndModify:false}
+    ).then((doc,err)=>{
+        if(err||!doc){
+            console.log(`# 请求|博客-写入|失败`);
+            res.json({
+                ...codeDic.ERROR_GLOBAL,
+                msg:err.message,
+                result:null
+            });
+        }else {
+            let dateStamp = new Date().toJSON().split('T')[0].replace(/-/g,'')+'_';
+            let fileName = (doc.fileName||(dateStamp+doc.name));
+            let headJson = `;;;\n${JSON.stringify(doc,[
+                'name','fileName','tags','cats',
+                'writer','author','reLink',
+                'remark'
+            ],'\t')}\n;;;\n\n\n`;
+            fs.writeFile(`${backUpPath}\/${fileName}.md`, headJson+req.body.content, (err2)=>{
+                if(err2){
+                    res.json({
+                        ...codeDic.SAVE_EXCEPT_BACKUP,
+                        result: doc
+                    });
+                }else {
+                    res.json({
+                        ...codeDic.SUCCESS_SAVE,
+                        result: doc
+                    });
+                }
+            })
+        }
+    });
 });
 
 /**
@@ -263,6 +287,7 @@ router.post('/save',
                    pattern.reLink = "";
                 }
                 let doc = null;
+                delete pattern.content;
                 //  重名校验
                 let mark =  await confBlog.findOne({name:{'$regex':eval(`/^${pattern.name}$/i`)}});
                 if(req.body._id){    //  修改
@@ -291,7 +316,7 @@ router.post('/save',
                         });
                     }else {
                         let dateStamp = new Date().toJSON().split('T')[0].replace(/-/g,'')+'_';
-                        pattern.name = dateStamp+pattern.name;
+                        pattern.fileName = dateStamp+pattern.name;
                         doc = await new confBlog(pattern).save();
                         console.log(`# 请求|博客-新建|成功-${pattern.name}`);
                         res.json({

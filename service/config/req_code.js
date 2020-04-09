@@ -19,6 +19,11 @@ module.exports={
     "success":true,
     "msg":"登录成功",
   },
+  "SAVE_EXCEPT_BACKUP":{
+    "code":"10004",
+    "success":true,
+    "msg":"保存成功，备份失败",
+  },
   "ERROR_GLOBAL":{
     "code":"20000",
     "success":false,

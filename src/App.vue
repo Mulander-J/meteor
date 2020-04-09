@@ -14,7 +14,10 @@
     components:{FooterBox},
     created(){
       //  初始化时间|位置|天气
-      this.$store.dispatch('global/action_initGlobal',{vm:this})
+      this.$store.dispatch('global/action_initGlobal',{vm:this});
+      window.onresize=(e)=>{
+        this.$store.commit('global/_updateResize',e)
+      }
     }
   }
 </script>

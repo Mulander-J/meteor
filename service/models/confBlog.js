@@ -2,6 +2,7 @@ let mongoose = require('mongoose');
 /*  书签实体对象  */
 module.exports = mongoose.model("confBlog",new mongoose.Schema({
     name:{type:String,required:true},    //  名称
+    fileName:String,    //  文件名
     tags:[String],  //  标签名集合
     cats: { type: mongoose.Schema.Types.ObjectId, ref: 'confCats' },  //  类目Id
     content:String, //  文章内容

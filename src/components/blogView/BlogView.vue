@@ -1,44 +1,36 @@
 <template>
-    <section class="meteor-blog-wrapper">
-        <div v-html="content"></div>
-    </section>
+    <div class="meteor-blogView-wrapper">
+        <section class="blog-content markdown-body meteor-blog-wrapper" v-html="content"></section>
+    </div>
 </template>
 
 <script>
+    import "mavon-editor/dist/markdown/github-markdown.min.css"
     export default {
         name: "BlogView",
-        data(){
-            return {
-                content:''
-            }
+        props:{
+          dataSource:{
+              type:Object,
+              default:()=>{
+                  return {
+                      content:''
+                  }
+              }
+          }
         },
-        mounted(){
-          this._initBlog()
-        },
-        methods:{
-            _initBlog(){
-                this.content = this.$markDown.render('1231\n' +
-                    '~~阿萨大~~\n' +
-                    '# 一级标题\n' +
-                    '## 二级标题\n' +
-                    '**粗体**\n' +
-                    '*斜体*\n' +
-                    '~~中划线~~\n' +
-                    '++下划线++\n' +
-                    '==标记==\n' +
-                    '^上角标^~下角标~\n' +
-                    '1. 321\n' +
-                    '2. 321\n' +
-                    '3. 131\n' +
-                    '4. 313\n' +
-                    '```javascript\n' +
-                    'let a = 35\n' +
-                    '```')
+        computed:{
+            content(){
+                return this.$markDown.render(this.dataSource.content||'> 文章暂未上传')
             }
         }
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+    .meteor-blogView-wrapper{
+        .blog-content{
+            width: 80%;
+            margin: 1rem auto;
+        }
+    }
 </style>
