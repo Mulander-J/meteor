@@ -20,3 +20,5 @@ yarn-error.log*
 *.sln
 *.sw?
 /doc/
+/service/logs/error.log
+/service/logs/success.log
