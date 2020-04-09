@@ -290,6 +290,8 @@ router.post('/save',
                             result:mark
                         });
                     }else {
+                        let dateStamp = new Date().toJSON().split('T')[0].replace(/-/g,'')+'_';
+                        pattern.name = dateStamp+pattern.name;
                         doc = await new confBlog(pattern).save();
                         console.log(`# 请求|博客-新建|成功-${pattern.name}`);
                         res.json({

@@ -38,21 +38,20 @@
         </div>
         <!--    阅读文章    -->
         <el-dialog  title="Blog" :visible.sync="showBlog" fullscreen>
-            <div>
-                文章
-            </div>
+            <BlogView/>
         </el-dialog>
     </section>
 </template>
 
 <script>
     import BlogLine from '@/components/blogLine/BlogLine.vue'
+    import BlogView from '@/components/blogView/BlogView.vue'
 
     const allMenuName = 'all';
 
     export default {
         name: "Blog",
-        components:{BlogLine},
+        components:{BlogLine,BlogView},
         data(){
             return {
                 allMenuName,

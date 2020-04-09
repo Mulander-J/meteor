@@ -57,7 +57,7 @@
                 </template>
                 <template v-else-if="editShow&&(dialogName==='MarkDown')">
                     <section class="meteor-adBlog-markDown meteor-blog-wrapper">
-                        <mavon-editor v-model="blogRow.value"
+                        <mavon-editor v-model="blogRow.content"
                                       @save="_handleMdSubmit"
                                       @helpToggle="_handleNoMeaning('虽点帮助，然并卵')"/>
                     </section>
@@ -98,7 +98,7 @@
                 queryData:null,
                 blogRow:{
                     _id:'',
-                    value:''
+                    content:''
                 }
             }
         },
@@ -172,7 +172,7 @@
                 };
                 this.blogRow = {
                     _id:'',
-                    value:''
+                    content:''
                 };
             },
             _handleSubmit(){
@@ -193,7 +193,7 @@
                     let {success,result} = res.data;
                     if(success){
                         THAT.blogRow._id = result[0]._id;
-                        THAT.blogRow.value = result[0].content.md;
+                        THAT.blogRow.content = result[0].content;
                         THAT.dialogName = 'MarkDown';
                         THAT.fullscreen = true;
                         THAT.editShow = true;
@@ -204,14 +204,11 @@
                     THAT.$message.error(err.message)
                 });
             },
-            _handleMdSubmit(string,render){
+            _handleMdSubmit(string){
                 let THAT = this;
                 this.$api.blog.write({
                     _id:this.blogRow._id,
-                    content:{
-                        md:string,
-                        html:render
-                    }
+                    content:string
                 }).then(res=>{
                     if(res.data.success){
                         THAT.$message.success('保存成功')
