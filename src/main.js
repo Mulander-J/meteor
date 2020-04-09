@@ -10,6 +10,7 @@ Vue.use(ElementUI)
 //  markdown编辑器，样式需单独引入
 import mavonEditor from 'mavon-editor'
 Vue.use(mavonEditor)
+Vue.prototype.$markDown = mavonEditor.markdownIt
 //  初始化浏览器样式
 import "./assets/style/reset.less"
 //  全局基本样式

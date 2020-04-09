@@ -85,7 +85,10 @@
       this._drawCanvas()
     },
     beforeDestroy(){
-      this.pixelObj.destroy()
+      if(this.homeTimer)clearInterval(this.homeTimer);
+      this.homeTimer = null;
+      this.pixelObj.destroy();
+      this.pixelObj = null;
     },
     methods: {
       _drawCanvas(){
@@ -101,8 +104,10 @@
         let _index = 0;
         this.pixelObj.print(this.pixelVal);
         this.homeTimer = setInterval(()=>{
-          this.pixelObj.print(strLine[_index++]);
-          if(_index===(strLine.length))_index=0
+          if(this.pixelObj){
+            this.pixelObj.print(strLine[_index++]);
+            if(_index===(strLine.length))_index=0
+          }
         },duration/(strLine.length))
       },
       _openUserDialog(){

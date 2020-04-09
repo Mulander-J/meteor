@@ -4,10 +4,7 @@ module.exports = mongoose.model("confBlog",new mongoose.Schema({
     name:{type:String,required:true},    //  名称
     tags:[String],  //  标签名集合
     cats: { type: mongoose.Schema.Types.ObjectId, ref: 'confCats' },  //  类目Id
-    content:{
-        html:String,    //  html文本
-        md:String   //  markdown格式
-    },
+    content:String, //  文章内容
     writer:String,  //  撰写者
     author:String,  //  作者
     reLink:String,  //  转载地址

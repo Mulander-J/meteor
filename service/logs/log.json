@@ -8,6 +8,14 @@
       "duration":"2020/04/01-",
       "logs":[
         {
+          "day":"day8",
+          "daily":[
+            "blog-view",
+            "bug修复：页面跳转时遗留定时器未清除",
+            "markDown样式与reset全局样式覆盖问题"
+          ]
+        },
+        {
           "day":"day7",
           "daily":[
             "blog-crud",
