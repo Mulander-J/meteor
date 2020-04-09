@@ -214,9 +214,61 @@ Plan2(全栈):博客文章本地攥写本地保存，另构建相应数据库存
     - conf_session
 ```
 
-### 2.3 截图说明
+```前端目录
+  - src
+    - api   //  请求类
+        - ...user/cats/tags.js //  博客后端api
+        - extend.js //  第三方api
+        - index.js
+    - assets    //  静态资源（样式）
+        - style
+            - reset.less    // 样式重置
+            - common.less   //  常用样式（居中，特效动画）
+            - var.less  //  定义全局变量
+    - components    //  组件
+    - config    //  配置
+    - plugin    //  插件
+    - router    //  路由
+    - store     //  vuex
+    - util      //  工具
+    - views     //  页面
+        - admin
+            - model
+                - ...AdBlog/AdUser/AdCats.vue    //  管理页
+                - AdUnit.vue    //  通用CRUD组件
+            - Admin.vue     //  管理页模板
+        - front
+            - blog
+            - bookmark
+            - home
+            - record
+        - start
+        - share
+    - App.vue   //  程序主视图
+    - main.js   //  程序入口
+    - registerServiceWorker.js  //  pwa后续用到，先留着
+```
 
-#### 截图
+```后端目录
+    - service
+        - config    //  配置
+        - lib   //  工具
+        - logs  //  日志
+            - logs.log  //  开发日志
+            - error.log //  错误日志
+            - success.log   //  成功日志
+        - middlewares   //  中间件
+            -   checkUser //    检测用户session（未使用）
+        - models    //  数据模型
+        - public    //  静态资源（未使用）
+        - routes    //  路由层 controller
+        - swagger   //  swagge插件配置
+        - views     //  视图页面（未使用）
+        - app.js    //  服务入口
+
+```
+
+### 2.3 截图
 
 - 开始页-白天
 
