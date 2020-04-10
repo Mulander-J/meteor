@@ -120,7 +120,7 @@ Plan2(全栈):博客文章本地攥写本地保存，另构建相应数据库存
 - 后端跨域 cors
 - 后端数据库事务 mongoose
 - 数据库 MongoDB
-- 图床 PicGo+github
+- 图床 PicGo+gitee
 - 网络 内网穿透
 
 ### 2.2要素拆解

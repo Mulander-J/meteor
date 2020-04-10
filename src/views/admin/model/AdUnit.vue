@@ -57,7 +57,7 @@
                 </template>
                 <template v-else-if="editShow&&(dialogName==='MarkDown')">
                     <section class="meteor-adBlog-markDown meteor-blog-wrapper">
-                        <mavon-editor v-model="blogRow.content"
+                        <mavon-editor v-model.lazy="blogRow.content"
                                       @save="_handleMdSubmit"
                                       @helpToggle="_handleNoMeaning('虽点帮助，然并卵')"/>
                     </section>
