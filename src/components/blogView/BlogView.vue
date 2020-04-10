@@ -1,6 +1,6 @@
 <template>
     <div class="meteor-blogView-wrapper">
-        <section class="blog-content markdown-body meteor-blog-wrapper" v-html="content"></section>
+        <section class="blog-content markdown-body meteor-blogView-markDown" v-html="content"></section>
     </div>
 </template>
 

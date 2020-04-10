@@ -13,7 +13,7 @@ export default {
     "homepage":packageInfo.homepage,
     "repository":packageInfo.repository.url.replace('git+',''),
     "createDate":"2020.03.12",
-    "headImg":"https://cdn.jsdelivr.net/gh/Mulander-J/mdpic/img/20200403134530.gif",
+    "headImg":"https://gitee.com/mulander/MdPic/raw/master/img/logo.gif",
     "contact":{
         "github":"https://github.com/Mulander-J",
         "segment":"https://segmentfault.com/u/mulander",
