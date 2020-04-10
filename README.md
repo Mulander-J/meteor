@@ -110,11 +110,14 @@ Plan2(全栈):博客文章本地攥写本地保存，另构建相应数据库存
 - 前端脚手架 vue-cli4.2
 - 前端 vue(vuex/router)+element-ui
 - 前端请求 axios
+- 前端第三方api跨域 vue-jsonp
 - 前端样式预处理语言 less
 - 前端markdown编辑器 mavon-editor
 - 后端 node+express
 - 后端swagger swagger-ui-express+swagger-jsdoc
 - 后端日志 express-winston
+- 后端跨域 cors
+- 后端数据库事务 mongoose
 - 数据库 MongoDB
 - 图床 PicGo+github
 - 网络 内网穿透
@@ -122,7 +125,6 @@ Plan2(全栈):博客文章本地攥写本地保存，另构建相应数据库存
 ### 2.2要素拆解
 
 ```markdown
-
 - 物理空间
     - doc 文章备份目录
     - service 后端开发目录
@@ -214,58 +216,41 @@ Plan2(全栈):博客文章本地攥写本地保存，另构建相应数据库存
     - conf_session
 ```
 
-```前端目录
-  - src
-    - api   //  请求类
-        - ...user/cats/tags.js //  博客后端api
-        - extend.js //  第三方api
-        - index.js
-    - assets    //  静态资源（样式）
-        - style
-            - reset.less    // 样式重置
-            - common.less   //  常用样式（居中，特效动画）
-            - var.less  //  定义全局变量
-    - components    //  组件
+后端目录
+```
+后端目录
+- service
     - config    //  配置
+    - lib   //  工具
+    - logs  //  日志
+        - logs.log  //  开发日志
+        - error.log //  错误日志
+        - success.log   //  成功日志
+    - middlewares   //  中间件
+        -   checkUser //    检测用户session（未使用）
+    - models    //  数据模型
+    - public    //  静态资源（未使用）
+    - routes    //  路由层 controller
+    - swagger   //  swagge插件配置
+    - views     //  视图页面（未使用）
+    - app.js    //  服务入口
+```
+前端目录
+```
+前端目录
+- src
+    - api    //  请求封装
+    - assets   //  资源
+    - components  //  组件
+    - config   //  配置
     - plugin    //  插件
     - router    //  路由
-    - store     //  vuex
-    - util      //  工具
-    - views     //  页面
-        - admin
-            - model
-                - ...AdBlog/AdUser/AdCats.vue    //  管理页
-                - AdUnit.vue    //  通用CRUD组件
-            - Admin.vue     //  管理页模板
-        - front
-            - blog
-            - bookmark
-            - home
-            - record
-        - start
-        - share
-    - App.vue   //  程序主视图
-    - main.js   //  程序入口
-    - registerServiceWorker.js  //  pwa后续用到，先留着
-```
-
-```后端目录
-    - service
-        - config    //  配置
-        - lib   //  工具
-        - logs  //  日志
-            - logs.log  //  开发日志
-            - error.log //  错误日志
-            - success.log   //  成功日志
-        - middlewares   //  中间件
-            -   checkUser //    检测用户session（未使用）
-        - models    //  数据模型
-        - public    //  静态资源（未使用）
-        - routes    //  路由层 controller
-        - swagger   //  swagge插件配置
-        - views     //  视图页面（未使用）
-        - app.js    //  服务入口
-
+    - store   //  vuex
+    - util     //  工具
+    - views    //  页面
+    - App.vue    //  主视图
+    - main.js    //  服务入口
+    - registerServiceWorker.js    //  pwa（暂未开发）
 ```
 
 ### 2.3 截图
@@ -280,7 +265,7 @@ Plan2(全栈):博客文章本地攥写本地保存，另构建相应数据库存
 
 - 登录页
 
-![login](./explain/img/20200409210017.jpg)
+![login](https://github.com/Mulander-J/meteor/blob/master/explain/img/20200409210017.jpg)
 
 - 首页
 
@@ -300,23 +285,19 @@ Plan2(全栈):博客文章本地攥写本地保存，另构建相应数据库存
 
 - 开发日志
 
-![log](./explain/img/20200409210146.jpg)
+![log](https://github.com/Mulander-J/meteor/blob/master/explain/img/20200409210146.jpg)
 
 - 管理页
 
-![log](./explain/img/20200409210146.jpg)
+![log](https://github.com/Mulander-J/meteor/blob/master/explain/img/20200409210220.jpg)
 
 - 博客管理
 
-![log](./explain/img/20200409210146.jpg)
+![log](https://github.com/Mulander-J/meteor/blob/master/explain/img/20200409210708.jpg)
 
 - markdown编辑器
 
-![log](./explain/img/20200409210146.jpg)
-
-- 类目树管理
-
-![log](./explain/img/20200409210146.jpg)
+![log](https://github.com/Mulander-J/meteor/blob/master/explain/img/20200409210404.jpg)
 
 
 ## 3.开发进度_最后更新：`2020/04/09`
