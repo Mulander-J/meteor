@@ -20,13 +20,6 @@ export const navData = [
 ];
 //  博客平台
 export const meteorRoute = [
-    //  开始页-管理登录
-    {
-        //  开始页
-        path: '/start',
-        name: 'Start',
-        component: () => import('../views/start/Start.vue')
-    },
     //  分享页
     {
         //  分享页
@@ -167,7 +160,14 @@ export const routes = [
     {
         path: '/',
         name: 'zero',
-        redirect:'/start'
+        redirect:'/meteor/home'
+    },
+    //  开始页-管理登录
+    {
+        //  开始页
+        path: '/start',
+        name: 'Start',
+        component: () => import('../views/start/Start.vue')
     },
     //  博客平台
     ...meteorRoute,

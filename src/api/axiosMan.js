@@ -1,6 +1,6 @@
 import axios from 'axios'
 // api的base_url
-const baseUrl='//192.168.3.3:9587';
+const baseUrl='//127.0.0.1:9587';
 // 请求超时时间
 const MaxTimeOut=5*60*1000;
 axios.defaults.baseURL = baseUrl;
