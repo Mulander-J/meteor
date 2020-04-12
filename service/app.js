@@ -138,6 +138,7 @@ function onListening() {
         `${hello.ctx}`,
         `${hello.line}`,
         `${config_default.name} | Listening on ${bind}`,
+         `Active at http://${config_default.host}:${config_default.port}`,
         `${hello.line}`,
     ].join('\n'));
 

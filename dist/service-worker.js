@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.cfce1f12dbb26979d264343a53d99e94.js"
+  "precache-manifest.f0f8997943b19d47a6aec226ca816bf2.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "meteor"});
