@@ -83,7 +83,6 @@
             handleNodeClick(node){
                 this.valueTitle = node[this.props.label]
                 this.valueId = node[this.props.value]
-                console.log(this.valueId);
                 this.$emit('getValue',this.valueId)
                 this.defaultExpandedKey = []
             },

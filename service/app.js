@@ -43,6 +43,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 //  设置公用资源地址
 // app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.resolve(__dirname, './../dist')));
 app.use(express.static(path.resolve(__dirname, './../dist')));
 //  支持跨域
 app.use(cors());
