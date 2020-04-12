@@ -294,6 +294,12 @@
                 }
             }
         }
-        .meteor-adBlog-markDown{}
+    }
+</style>
+<style lang="less">
+    .meteor-adBlog-markDown{
+        .v-note-panel{
+            max-height: calc(100vh - 10rem);
+        }
     }
 </style>
