@@ -1,13 +1,19 @@
 <template>
     <div class="meteor-blogView-wrapper">
-        <section class="blog-content markdown-body meteor-blogView-markDown" v-html="content"></section>
+        <section class="blog-content meteor-blogView-markDown">
+            <VMdPreview :text="content"/>
+        </section>
     </div>
 </template>
 
 <script>
-    import "mavon-editor/dist/markdown/github-markdown.min.css"
+    import '@kangc/v-md-editor/lib/style/preview.css';
+    import  vmEdit from '@/plugin/vmedit';
     export default {
         name: "BlogView",
+        components:{
+            VMdPreview:vmEdit.VMdPreview
+        },
         props:{
           dataSource:{
               type:Object,
@@ -20,7 +26,7 @@
         },
         computed:{
             content(){
-                return this.$markDown.render(this.dataSource.content||'> 文章暂未上传')
+                return this.dataSource.content||'> 文章暂未上传'
             }
         }
     }
