@@ -109,8 +109,7 @@ export default {
     actions: {
         //  异步获取地理位置信息
         [type.ACTION_GLOBAL_INIT]({commit},{vm}){
-            const env = 'development';
-            if(env==='development'){
+            if(process.env.NODE_ENV === 'development'){
                 commit(type.GLOBAL_INIT,{param:{status:-1}})
             }else {
                 vm.$jsonp(vm.$api.extend.getBaiDuLocation).then(res=>{

@@ -58,8 +58,8 @@
                 <template v-else-if="editShow&&(dialogName==='MarkDown')">
                     <section class="meteor-adBlog-markDown meteor-blog-wrapper">
                         <VMdEditor
-                                left-toolbar="h bold italic strikethrough quote | ul ol table hr | code link image | undo redo clear | tip"
-                                right-toolbar="save | fullscreen"
+                                left-toolbar="h bold italic strikethrough | code quote tip| ul ol table hr | link image | undo redo clear save"
+                                right-toolbar="fullscreen"
                                 v-model.lazy="blogRow.content"
                                 @save="_handleMdSubmit"
                                 :height="editorHeight+'px'"
@@ -177,7 +177,7 @@
 
             _handleEdit(row){
                 this.formData = {
-                    ...this.defaultData,
+                    ...this.$util._getDeepCopy(this.defaultData),
                     ...row
                 };
                 this.dialogName = 'Model';
@@ -185,9 +185,7 @@
                 this.editShow = true;
             },
             _handleClose(){
-                this.formData ={
-                    ...this.defaultData
-                };
+                this.formData = this.$util._getDeepCopy(this.defaultData);
                 this.dialogName = '';
                 this.blogRow = {
                     _id:'',

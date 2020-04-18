@@ -9,6 +9,8 @@ node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+/service/logs/error.log
+/service/logs/success.log
 
 # Editor directories and files
 .idea
@@ -19,5 +21,3 @@ yarn-error.log*
 *.sln
 *.sw?
 /doc/
-/service/logs/error.log
-/service/logs/success.log
