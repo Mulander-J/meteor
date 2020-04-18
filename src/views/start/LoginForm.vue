@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="container-form">
-            <div class="form-item log-in meteor-flex-center">
+            <div class="form-item log-in meteor-flex-center" @keydown.enter="_handleLogin">
                 <!-- login form-->
                 <el-form :model="logParam" size="small">
                     <el-form-item>
@@ -27,7 +27,7 @@
                     <span class="meteor-btn-hover btn-hover-victor-3" @click="_handleLogin">Log In</span>
                 </el-form>
             </div>
-            <div class="form-item sign-up meteor-flex-center">
+            <div class="form-item sign-up meteor-flex-center" @keydown.enter="_handleSignUp">
                 <!-- sign-up form-->
                 <el-form :model="logParam" size="small">
                     <el-form-item>
