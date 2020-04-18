@@ -57,9 +57,13 @@
                 </template>
                 <template v-else-if="editShow&&(dialogName==='MarkDown')">
                     <section class="meteor-adBlog-markDown meteor-blog-wrapper">
-                        <mavon-editor v-model.lazy="blogRow.content"
-                                      @save="_handleMdSubmit"
-                                      @helpToggle="_handleNoMeaning('虽点帮助，然并卵')"/>
+                        <VMdEditor
+                                left-toolbar="h bold italic strikethrough quote | ul ol table hr | code link image | undo redo clear | tip"
+                                right-toolbar="save | fullscreen"
+                                v-model.lazy="blogRow.content"
+                                @save="_handleMdSubmit"
+                                :height="editorHeight+'px'"
+                        />
                     </section>
                 </template>
             </transition>
@@ -68,8 +72,11 @@
 </template>
 
 <script>
+    import '@kangc/v-md-editor/lib/style/codemirror-editor.css';
+    import  vmEdit from '@/plugin/vmedit';
     export default {
         name: "AdUnit",
+        components:{VMdEditor:vmEdit.VMdCodeEditor},
         props:{
             title:{type:String, default:''},
             apiName:{type:String, default:''},
@@ -99,7 +106,18 @@
                 blogRow:{
                     _id:'',
                     content:''
-                }
+                },
+                editorHeight:400
+            }
+        },
+        computed: {
+            resizeIndex(){
+                return this.$store.state.global.resizeIndex
+            }
+        },
+        watch: {
+            resizeIndex(){
+                this.editorHeight = window.innerHeight-120;
             }
         },
         created(){
@@ -107,7 +125,7 @@
             this.queryData = {...this.defaultQuery};
         },
         mounted(){
-            this._handlePage()
+            this._handlePage();
         },
         methods:{
             _handlePage(){
@@ -189,6 +207,7 @@
 
             _handleMdEdit(row){
                 let THAT = this;
+                this.editorHeight = window.innerHeight-120;
                 this.$api.blog.read(row._id).then(res=>{
                     let {success,result} = res.data;
                     if(success){
@@ -218,9 +237,6 @@
                 }).catch(err=>{
                     THAT.$message.error(err.message)
                 })
-            },
-            _handleNoMeaning(str){
-                this.$message.info(str)
             },
 
             _handleDelete(id){

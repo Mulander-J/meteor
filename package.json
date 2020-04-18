@@ -23,6 +23,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@kangc/v-md-editor": "^1.1.0",
     "element-ui": "^2.13.0",
     "jinrishici": "^1.0.6",
     "register-service-worker": "^1.6.2",
@@ -31,8 +32,7 @@
     "vue-jsonp": "^0.1.8",
     "vue-particles": "^1.0.9",
     "vue-router": "^3.1.5",
-    "vuex": "^3.1.2",
-    "mavon-editor": "^2.8.3"
+    "vuex": "^3.1.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.2.0",

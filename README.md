@@ -113,7 +113,7 @@ Plan2(全栈):博客文章本地攥写本地保存，另构建相应数据库存
 - 前端请求 axios
 - 前端第三方api跨域 vue-jsonp
 - 前端样式预处理语言 less
-- 前端markdown编辑器 mavon-editor
+- 前端markdown编辑器 ~~mavon-editor~~ @kangc/v-md-editor
 - 后端 node+express
 - 后端swagger swagger-ui-express+swagger-jsdoc
 - 后端日志 express-winston

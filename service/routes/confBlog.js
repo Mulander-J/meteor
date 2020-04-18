@@ -216,9 +216,9 @@ router.post('/page', (req, res) => {
         //查询出结果返回
         confBlog.find(_condition,_selector)
             .populate('cats thumb','name _id')
+            .sort({'_created':-1,'_updated':-1,'name':-1})
             .skip((pageNo - 1) * pageSize)
             .limit(pageSize)
-            .sort({'_updated':-1,'name':-1})
             .exec((err, doc) => {
                 if (!err && doc) {
                     console.log(`# 请求|博客-分页列表|成功`);
