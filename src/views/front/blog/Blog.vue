@@ -127,7 +127,7 @@
         },
         methods: {
             _getNewHeight(){
-                this.blogLineHeight = window.innerHeight-14*20;
+                this.blogLineHeight = window.innerHeight-14*22;
             },
             _handleBlogPage() {
                 let THAT = this;
@@ -249,27 +249,20 @@
 </script>
 
 <style scoped lang="less">
-    @leftPx: 250px;
-    @blankPx: 50px;
     .meteor-Blog-wrapper {
-        padding: 2rem;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-start;
-
+        padding: 14px;
         .blog-col-menu {
-            width: @leftPx;
-            min-height: 20em;
-            position: fixed;
+            position: relative;
+            float: left;
             z-index: 5;
+            width: 250px;
+            min-height: 20em;
             background: transparent;
         }
-
         .blog-col-timeLine {
-            width: calc(100% - @leftPx - @blankPx);
-            margin-left: @leftPx;
+            position: relative;
             z-index: 5;
+            overflow: hidden;
         }
     }
 </style>
