@@ -95,7 +95,7 @@
                 tableLoading:false,
                 editShow:false,
                 fullscreen:false,
-                dialogName:'Model',
+                dialogName:'',
                 pageOps:{
                     total:1,
                     pageSize:10,
@@ -188,6 +188,7 @@
                 this.formData ={
                     ...this.defaultData
                 };
+                this.dialogName = '';
                 this.blogRow = {
                     _id:'',
                     content:''
