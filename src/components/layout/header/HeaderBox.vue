@@ -1,7 +1,7 @@
 <template>
     <div class="meteor-header-wrapper meteor-flex-between">
         <!--    左侧logo  -->
-        <a class="meteor-header-startLink meteor-nyanCat" @click="_goRouter({name:'Home'})">{{$conf.name}}</a>
+        <a class="meteor-header-startLink meteor-nyanCat" @click="_goRouter({name:'Admin'})">{{$conf.name}}</a>
         <div class="meteor-header-right">
             <!--    整站搜索    -->
             <el-input class="search-box"  size="small" prefix-icon="el-icon-search" placeholder=""></el-input>
