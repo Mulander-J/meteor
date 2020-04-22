@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0ac1bd"],{"17ab":function(e,c,n){"use strict";n.r(c);var t=function(){var e=this,c=e.$createElement,n=e._self._c||c;return n("div",[e._v(" RecTicket-开发中 ")])},a=[],i={name:"RecTicket"},u=i,r=n("2877"),s=Object(r["a"])(u,t,a,!1,null,"2ba0d916",null);c["default"]=s.exports}}]);
-//# sourceMappingURL=chunk-2d0ac1bd.e628455a.js.map

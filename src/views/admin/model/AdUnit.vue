@@ -58,8 +58,8 @@
                 <template v-else-if="editShow&&(dialogName.indexOf('MarkDown')>-1)">
                     <section class="meteor-adBlog-markDown meteor-blog-wrapper">
                         <VMdEditor
-                                left-toolbar="h bold italic strikethrough | code quote tip| ul ol table hr | link image | undo redo clear save"
-                                right-toolbar="fullscreen"
+                                left-toolbar="h bold italic strikethrough | code quote tip | ul ol table hr | link image template | undo redo clear save"
+                                :toolbar="editor_toolbar"
                                 v-model.lazy="blogRow.content"
                                 @save="_handleMdSubmit"
                                 :height="editorHeight+'px'"
@@ -107,7 +107,31 @@
                     _id:'',
                     content:''
                 },
-                editorHeight:400
+                editorHeight:400,
+                editor_toolbar:{
+                    "template":{
+                        title: '快速模板',
+                        icon: 'el-icon-document-copy',
+                        menus: [
+                            {
+                                name: 'leetCode',
+                                text: 'leetCode',
+                                action:()=> {
+                                    this.blogRow.content=('# \n' +
+                                        '## Question\n' +
+                                        '## Exapmle\n' +
+                                        '```\n' +
+                                        '```\n' +
+                                        '## Note\n' +
+                                        '## Solution\n' +
+                                        '> `javascript`\n' +
+                                        '```javascript\n' +
+                                        '```')
+                                },
+                            }
+                        ],
+                    }
+                }
             }
         },
         computed: {
@@ -211,7 +235,7 @@
                     let {success,result} = res.data;
                     if(success){
                         THAT.blogRow._id = result[0]._id;
-                        THAT.blogRow.content = result[0].content;
+                        THAT.blogRow.content = result[0].content||'';
                         THAT.dialogName = `MarkDown-${result[0].name}`;
                         THAT.fullscreen = true;
                         THAT.editShow = true;
