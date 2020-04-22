@@ -18,12 +18,14 @@
                         allow-create
                         default-first-option
                         placeholder="标签">
-                    <el-option
-                            v-for="item in selectOps"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value">
-                    </el-option>
+                    <div style="max-height: 200px;overflow-y: auto;">
+                        <el-option
+                                v-for="item in selectOps"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                        </el-option>
+                    </div>
                 </el-select>
             </el-form-item>
         </template>

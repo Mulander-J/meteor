@@ -55,7 +55,7 @@
                         </div>
                     </el-form>
                 </template>
-                <template v-else-if="editShow&&(dialogName==='MarkDown')">
+                <template v-else-if="editShow&&(dialogName.indexOf('MarkDown')>-1)">
                     <section class="meteor-adBlog-markDown meteor-blog-wrapper">
                         <VMdEditor
                                 left-toolbar="h bold italic strikethrough | code quote tip| ul ol table hr | link image | undo redo clear save"
@@ -212,7 +212,7 @@
                     if(success){
                         THAT.blogRow._id = result[0]._id;
                         THAT.blogRow.content = result[0].content;
-                        THAT.dialogName = 'MarkDown';
+                        THAT.dialogName = `MarkDown-${result[0].name}`;
                         THAT.fullscreen = true;
                         THAT.editShow = true;
                     }else {
