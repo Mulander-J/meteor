@@ -151,8 +151,7 @@ router.post('/write',  (req, res) => {
                 result:null
             });
         }else {
-            let dateStamp = new Date().toJSON().split('T')[0].replace(/-/g,'')+'_';
-            let fileName = (doc.fileName||(dateStamp+doc.name));
+            let fileName = doc.fileName||(new Date().toJSON().split('T')[0].replace(/-/g,'')+'_'+doc._id);
             let headJson = `;;;\n${JSON.stringify(doc,[
                 'name','fileName','tags','cats',
                 'writer','author','reLink',
@@ -316,7 +315,7 @@ router.post('/save',
                         });
                     }else {
                         let dateStamp = new Date().toJSON().split('T')[0].replace(/-/g,'')+'_';
-                        pattern.fileName = dateStamp+pattern.name;
+                        pattern.fileName = dateStamp+pattern._id;
                         doc = await new confBlog(pattern).save();
                         console.log(`# 请求|博客-新建|成功-${pattern.name}`);
                         res.json({
