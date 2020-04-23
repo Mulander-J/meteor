@@ -137,7 +137,7 @@ router.get('/read', [validator.check('_id').exists({checkFalsy:true,checkNull:tr
  *       200:
  *         description: 【成功】
  */
-router.post('/write',  (req, res) => {
+router.post('/write',   (req, res) => {
     confBlog.findOneAndUpdate(
         {_id:req.body._id},
         {content:req.body.content},
@@ -151,11 +151,10 @@ router.post('/write',  (req, res) => {
                 result:null
             });
         }else {
-            let fileName = doc.fileName||(new Date().toJSON().split('T')[0].replace(/-/g,'')+'_'+doc._id);
+            let fileName = doc.fileName||(new Date(doc._created).toJSON().split('T')[0].replace(/-/g,'')+'_'+doc._id);
             let headJson = `;;;\n${JSON.stringify(doc,[
                 'name','fileName','tags','cats',
-                'writer','author','reLink',
-                'remark'
+                'writer','author','reLink', 'remark'
             ],'\t')}\n;;;\n\n\n`;
             fs.writeFile(`${backUpPath}\/${fileName}.md`, headJson+req.body.content, (err2)=>{
                 if(err2){
@@ -314,10 +313,12 @@ router.post('/save',
                             result:mark
                         });
                     }else {
-                        let dateStamp = new Date().toJSON().split('T')[0].replace(/-/g,'')+'_';
-                        pattern.fileName = dateStamp+pattern._id;
+                        pattern.fileName = "";
                         doc = await new confBlog(pattern).save();
                         console.log(`# 请求|博客-新建|成功-${pattern.name}`);
+                        let fileName = new Date(doc._created).toJSON().split('T')[0].replace(/-/g,'')+'_'+doc._id;
+                        doc = await confBlog.updateOne({_id:doc._id},{fileName:fileName});
+                        console.log(`# 请求|博客-新建|文件名追加成功-${fileName}`);
                         res.json({
                             ...codeDic.SUCCESS_SAVE,
                             result:doc
