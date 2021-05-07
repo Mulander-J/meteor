@@ -27,7 +27,7 @@
     "element-ui": "^2.13.0",
     "jinrishici": "^1.0.6",
     "register-service-worker": "^1.6.2",
-    "underscore": "^1.10.2",
+    "underscore": "^1.12.1",
     "vue": "^2.6.11",
     "vue-jsonp": "^0.1.8",
     "vue-particles": "^1.0.9",
